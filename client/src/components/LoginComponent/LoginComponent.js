@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { connect } from "react-redux";
-import { fetchRegister } from "../../actions/RegisterAction";
+import { fetchLogin } from "../../actions/LoginAction";
 import {
   successNotification,
   errorNotification
@@ -81,5 +81,5 @@ const Login = styled(LoginPage)``;
 
 export default connect(
   mapStateToProps,
-  { fetchRegister, successNotification, errorNotification }
+  { fetchLogin, successNotification, errorNotification }
 )(Login);

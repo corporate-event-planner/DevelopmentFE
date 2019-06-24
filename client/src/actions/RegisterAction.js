@@ -5,13 +5,12 @@ export const FAILURE_REGISTER = "FAILURE_REGISTER";
 export const SUCCESS_REGISTER = "SUCCESS_REGISTER";
 
 // const api = "https://backendfoodtruck.herokuapp.com";
-const api = "http://localhost:5000";
 
 export const fetchRegister = user => dispatch => {
   console.log(user);
   dispatch({ type: START_REGISTER });
   return axios
-    .post(`${api}/register`, user)
+    .post(`/register`, user)
     .then(res => {
       dispatch({ type: SUCCESS_REGISTER });
       return true;

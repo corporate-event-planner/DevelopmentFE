@@ -15,23 +15,6 @@ import RegisterComponent from "./RegisterComponent"
 import LoginComponent from "./LoginComponent";
 
 class LoginPage extends React.Component {
-  state = {
-    username: "",
-    password: ""
-  };
-
-  handleSubmit = e => {
-    e.preventDefault();
-    this.props.fetchLogin({ ...this.state }).then(res => {
-      if (!res) {
-        this.props.errorNotification(this.props.errors);
-      }
-    });
-  };
-
-  handleOnChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
 
   render() {
     return (
@@ -63,16 +46,6 @@ class LoginPage extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  isLoggedIn: state.loginReducer.isLoggedIn,
-  isLoggedOut: state.loginReducer.isLoggedOut,
-  isFetching: state.loginReducer.isFetching,
-  errors: state.loginReducer.errors
-});
-
 const Login = styled(LoginPage)``;
 
-export default connect(
-  mapStateToProps,
-  { fetchLogin, successNotification, errorNotification }
-)(Login);
+export default Login;
