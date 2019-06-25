@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-
 import Navigation from '../NavComponent/Navigation';
 import Footer from '../FooterComponent/Footer';
 import './EventsList.scss';
@@ -25,7 +24,7 @@ class EventsList extends React.Component {
                         <Form.Input 
                         icon='search'
                         size='large'
-                        placeholder='...search'
+                        placeholder='Find events'
                         value={this.state.search}
                         onChange={this.handleChanges}
                         />
@@ -62,13 +61,12 @@ class EventsList extends React.Component {
     this.setState({ [event.target.name]: event.target.value})
     }
 
-
 }
 
 const mapStateToProps = (state) => {
     return {
-        events: state.EventsReducer.events,
-        isSearching: state.EventsReducer.isSearching
+        events: state.eventsReducer.events,
+        isSearching: state.eventsReducer.isSearching
     }
 }
 
