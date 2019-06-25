@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "react-redux-notify/dist/ReactReduxNotify.css";
 import "semantic-ui-css/semantic.min.css";
 import Login from "./components/LoginComponent";
@@ -23,12 +23,17 @@ function App() {
 const rootElement = document.getElementById("root");
 ReactDOM.render(
   <Provider store={store}>
+
     <Router>
+      <Link to="/calendar"> Calendar </Link>
+      <Link to="/home"> Home </Link>
+      <Link to="/events"> Events </Link>
       <Route exact path="/" component={App} />
       <Route path="/calendar" component={CalendarEvents} />
       <Route exact path='/home' component={Home} />
       <Route exact path="/events" component={EventsList} />
       <Route exact path="/createevent" component={App} />
+
     </Router>
   </Provider>,
   rootElement

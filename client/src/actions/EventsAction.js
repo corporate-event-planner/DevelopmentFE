@@ -24,10 +24,14 @@ const headers = { "X-API-Key": key }
 //         })
 // }
 
+export const postEvent = (event) => dispatch => {
+    dispatch({ type: FETCH_EVENTS_START });
+}
+
 export const getEvents = () => dispatch => {
     dispatch({ type: FETCH_EVENTS_START })
-    fetch('https://my.api.mockaroo.com/events.json', {headers})
-        .then(response => response.json() )
+    fetch('https://my.api.mockaroo.com/events.json', { headers })
+        .then(response => response.json())
         .then(events => {
             console.log(events)
             dispatch({ type: FETCH_EVENTS_SUCCESS, payload: events })

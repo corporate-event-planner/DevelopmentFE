@@ -1,10 +1,22 @@
 import React from 'react';
 import { Button, Input, Label, Form } from 'semantic-ui-react'
+import { connect } from "react-redux";
+import { postEvent } from "../../actions/EventsAction";
+import {
+  successNotification,
+  errorNotification
+} from "../../actions/NotifyAction";
 
-export default class EventsForm extends React.Component {
+class EventsForm extends React.Component {
+  state = {
+    name: "",
+    description: "",
+    budget: ""
+  }
+
   render() {
     return (
-      <Form>
+      <Form loading={this.props.isFetching} onSubmit={() => this.props.postEvent(this.state)}>
         <Form.Field>
           <label>Event Name</label>
           <input placeholder='Name' name="name" />
@@ -15,12 +27,9 @@ export default class EventsForm extends React.Component {
         </Form.Field>
         <Form.Field>
           <label>Budget</label>
-          <input placeholder='Budget' name="Budget" />
-        </Form.Field>
-        <Form.Field>
           <Input labelPosition='right' type='text' placeholder='Amount'>
             <Label basic>$</Label>
-            <input />
+            <input name="budget" />
             <Label>.00</Label>
           </Input>
         </Form.Field>
@@ -29,3 +38,9 @@ export default class EventsForm extends React.Component {
     )
   }
 }
+
+const mapStateToProps = state => ({
+  isFetching: state.eventsReducer.isFetching,
+});
+
+export default connect(mapStateToProps, { postEvent })(EventsForm)
