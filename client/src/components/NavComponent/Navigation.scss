@@ -1,0 +1,21 @@
+$primary-color: #1E80AA;
+$secondary-color: #082A47;
+$teritary-color: #632A50;
+$gray-color: #4D545D;
+$off-white: #FBFBFB;
+$off-black: #020207;
+
+
+.navigation-container {
+    width: 100%;
+    height: 300px;
+    background-color: $primary-color;
+    
+    .navigation-bar {
+        width: 900px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+}
