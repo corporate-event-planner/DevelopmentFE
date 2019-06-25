@@ -9,6 +9,7 @@ import Login from "./components/LoginComponent";
 import rootReducer from "./reducers";
 import logger from "redux-logger";
 import thunk from "redux-thunk";
+import CalendarEvents from "./components/CalendarComponent";
 
 const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 
@@ -21,6 +22,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <Route exact path="/" component={App} />
+      <Route path="/calendar" component={CalendarEvents} />
     </Router>
   </Provider>,
   rootElement
