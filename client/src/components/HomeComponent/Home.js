@@ -9,11 +9,11 @@ class Home extends React.Component {
         return(
             <>
             <Navigation />
-            <h1>Home</h1>
+                <h1>Home</h1>
             <Footer />
             </>
         )
     }
 }
 
-export default Home
+export default Home;

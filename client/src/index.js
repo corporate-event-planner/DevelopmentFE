@@ -9,6 +9,9 @@ import Login from "./components/LoginComponent";
 import rootReducer from "./reducers";
 import logger from "redux-logger";
 import thunk from "redux-thunk";
+import Home from './components/HomeComponent/Home'
+import EventsList from './components/EventComponent/EventsList'
+
 
 const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 
@@ -21,6 +24,9 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <Route exact path="/" component={App} />
+      <Route exact path='/home' component={Home} />
+      <Route exact path="/events" component={EventsList} />
+      <Route exact path="/createevent" component={App} />
     </Router>
   </Provider>,
   rootElement

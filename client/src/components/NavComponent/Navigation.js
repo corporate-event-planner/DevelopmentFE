@@ -1,7 +1,7 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
 import './Navigation.scss'
-import EventsList from '../EventComponent/EventsList'
 
 const Navigation = ( ) => {
     return(
@@ -9,9 +9,9 @@ const Navigation = ( ) => {
             <div className='navigation-bar'>
                 <div className='title'><h1>Corporate Event Planner</h1></div>
                 <div className='nav-items'>
-                    <Route exact path='/' render={props => <Home {...props} />} />
-                    <Route exact path='/events' render={props => <EventsList {...props} />} />
-                    <Route exact path='/createevent' render={props => <CreateEvent {...props} />} />
+                    <Link to='/' >Home</Link>
+                    <Link to='/events'>Events</Link>
+                    <Link to='/createevent'>Create Event</Link>
                 </div>
             </div>
         </div>
