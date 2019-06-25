@@ -1,0 +1,27 @@
+@import '../../styles/variables.scss';
+
+.events-container {
+    width: 900px;
+    margin: 80px auto;
+    border: 1px solid $gray-color;
+    border-radius: 10px;
+
+    .events-header {
+        height: 90px;
+        padding: 0 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        background-color: $secondary-color;
+        
+        .search-bar {
+            display: flex;
+        }
+    }
+
+    .events-list {
+        padding: 20px;
+    }
+}
