@@ -25,10 +25,6 @@ const rootElement = document.getElementById("root");
 ReactDOM.render(
   <Provider store={store}>
     <Router>
-      <Link to="/calendar"> Calendar </Link>
-      <Link to="/"> Home </Link>
-      <Link to="/events"> Events </Link>
-      <Link to="/form"> Events Form </Link>
       <PrivateRoute exact path="/" component={Home} />
       <PrivateRoute path="/calendar" component={CalendarEvents} />
       <PrivateRoute exact path="/events" component={EventsList} />

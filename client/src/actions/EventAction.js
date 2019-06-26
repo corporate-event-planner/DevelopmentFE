@@ -1,13 +1,13 @@
+import axiosWithAuth from './AxiosWithAuth'
+
 export const FETCH_ONEEVENT_START = 'FETCH_ONEEVENT_START';
 export const FETCH_ONEEVENT_SUCCESS = 'FETCH_ONEEVENT_SUCCESS';
 export const FETCH_ONEEVENT_FAILURE = 'FETCH_ONEEVENT_FAILURE';
 
-const key = '9ed169d0'
-const headers = { "X-API-Key": key }
-
-export const getOneEvent = () => dispatch => {
+export const getOneEvent = (eventid) => dispatch => {
     dispatch({ type: FETCH_ONEEVENT_START })
-    fetch('https://my.api.mockaroo.com/events/:eventid.json', {headers})
+    axiosWithAuth()
+        .get(`https://corporate-event-planner.herokuapp.com/events/${eventid}`)
         .then(response => response.json() )
         .then(event => {
             console.log(event)

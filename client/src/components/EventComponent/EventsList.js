@@ -13,14 +13,10 @@ class EventsList extends React.Component {
     state = {
         search: '',
         filteredEvents: [],
-        stateEvents: this.props.events
     }
 
     render() {
         console.log('render',this.state.filteredEvents)
-        // if ( this.state.events.length === 0) {
-        //     return <h1>loading</h1>
-        // }
         return (
             <>
             <Navigation />
@@ -84,8 +80,8 @@ class EventsList extends React.Component {
     }
 
     handleChanges = (event) => {
-    this.setState({ [event.target.name]: event.target.value})
-    console.log(this.state.search)
+        this.setState({ [event.target.name]: event.target.value})
+        console.log(this.state.search)
     }
 
     searchEvents = (event) => {

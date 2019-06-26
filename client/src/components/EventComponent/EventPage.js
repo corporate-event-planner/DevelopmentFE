@@ -34,8 +34,12 @@ class EventPage extends React.Component {
                     <div className='event-tasks'>
                         {this.props.event.tasklist.map(list => (
                             <div className='tasklist-container'>
-                                <div className='tasklist-name'>
-
+                                
+                                <div className='tasklist-category'>
+                                    <h3>Graphic Design</h3>
+                                </div>
+                                <div className='tasks'>
+                                
                                 </div>
                             </div>
                         ))}
