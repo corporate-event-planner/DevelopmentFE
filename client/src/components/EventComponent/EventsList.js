@@ -13,10 +13,14 @@ class EventsList extends React.Component {
     state = {
         search: '',
         filteredEvents: [],
+        stateEvents: this.props.events
     }
 
     render() {
         console.log('render',this.state.filteredEvents)
+        // if ( this.state.events.length === 0) {
+        //     return <h1>loading</h1>
+        // }
         return (
             <>
             <Navigation />
@@ -38,20 +42,36 @@ class EventsList extends React.Component {
                     </div>
                 </div>
                 <div className='events-list'>
-                    {this.props.events.map(event => (
-                       
-                        <Card link className='event-card' color='#082A47' >
-                            <Card.Content className='event-title' header={event.name} color='white' />
-                            <Card.Content>
-                                <p> Company: {event.companyname}</p>
-                                <p>Date: {event.date}</p>
-                                <p>Budget: {event.budget}</p>
-                            </Card.Content>
-                            <Link to={`/events/${event.eventid}`}>
-                                <Button fluid>View Now</Button>
-                            </Link>
-                        </Card>
-                    ))}
+                    {this.state.filteredEvents.length > 0 ? (
+                        this.state.filteredEvents.map(event => (
+                            <Card link className='event-card' color='#082A47' >
+                                <Card.Content className='event-title' header={event.name} color='white' />
+                                <Card.Content>
+                                    <p> Company: {event.companyname}</p>
+                                    <p>Date: {event.date}</p>
+                                    <p>Budget: {event.budget}</p>
+                                </Card.Content>
+                                <Link to={`/events/${event.eventid}`}>
+                                    <Button fluid>View Now</Button>
+                                </Link>
+                            </Card>
+                            ))
+                        ) : (
+                            this.props.events.map(event => (
+                                <Card link className='event-card' color='#082A47' >
+                                    <Card.Content className='event-title' header={event.name} color='white' />
+                                    <Card.Content>
+                                        <p> Company: {event.companyname}</p>
+                                        <p>Date: {event.date}</p>
+                                        <p>Budget: {event.budget}</p>
+                                    </Card.Content>
+                                    <Link to={`/events/${event.eventid}`}>
+                                        <Button fluid>View Now</Button>
+                                    </Link>
+                                </Card>
+                            ))
+                        )
+                    }
                 </div>
             </div>
             <Footer />
@@ -72,9 +92,8 @@ class EventsList extends React.Component {
         event.preventDefault();
         const filtered = this.props.events.filter(event => event.name.includes(this.state.search));
         this.setState({
-            ...this.state,
             filteredEvents: filtered,
-        }, ()=>console.log('filteredEvents',this.state.filteredEvents))
+        })
     }
 
 }
@@ -85,16 +104,5 @@ const mapStateToProps = (state) => {
         isSearching: state.eventsReducer.isSearching
     }
 }
-
-/* <Button
-    size='large'
-    loading={this.props.isSearching ? true : false}
->Search</Button>asd */
-
-        // this.setState(prevState => ({
-        //     ...prevState,
-        //     searched: filtered,
-        //     test: 'this is the test working!'
-        // }))
 
 export default connect(mapStateToProps, { getEvents, searchEvents })(EventsList)

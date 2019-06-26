@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 
 import Navigation from '../NavComponent/Navigation';
 import Footer from '../FooterComponent/Footer';
+import './EventPage.scss'
+import { getOneEvent } from '../../actions/EventAction'
 
 class EventPage extends React.Component {
     state = {
@@ -18,6 +20,16 @@ class EventPage extends React.Component {
             </>
         )
     }
+
+    componentDidMount() {
+        this.props.getOneEvent();
+    }
 }
 
-export default EventPage;
+const mapStateToProps = (state) => {
+    return {
+        event: state.eventsReducer.event,
+    }
+}
+
+export default connect(mapStateToProps, { getOneEvent })(EventPage);

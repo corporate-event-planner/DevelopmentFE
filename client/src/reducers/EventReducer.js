@@ -1,8 +1,8 @@
 import {
-    FETCH_EVENTS_START,
-    FETCH_EVENTS_SUCCESS,
-    FETCH_EVENTS_FAILURE, 
-} from '../actions/EventsAction'
+    FETCH_ONEEVENT_START,
+    FETCH_ONEEVENT_SUCCESS,
+    FETCH_ONEEVENT_FAILURE, 
+} from '../actions/EventAction'
 
 const initialState = {
     events: [],
@@ -10,22 +10,22 @@ const initialState = {
     errors: '',
 }
 
-export const eventsReducer = ( state = initialState, action ) => {
+export const eventReducer = ( state = initialState, action ) => {
     switch(action.type) {
-        case FETCH_EVENTS_START:
+        case FETCH_ONEEVENT_START:
             return {
                 ...state,
                 error: '',
                 isSearching: true
             }
-        case FETCH_EVENTS_SUCCESS:
+        case FETCH_ONEEVENT_SUCCESS:
             return {
                 ...state,
                 error: '',
                 isSearching: false,
-                events: action.payload
+                event: action.payload
             }
-        case FETCH_EVENTS_FAILURE:
+        case FETCH_ONEEVENT_FAILURE:
             return {
                 ...state,
                 error: action.payload,

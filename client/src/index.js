@@ -29,7 +29,7 @@ ReactDOM.render(
       <Route path="/calendar" component={CalendarEvents} />
       <Route exact path='/home' component={Home} />
       <Route exact path="/events" component={EventsList} />
-      <Route exact path='/events/{id}' component={EventPage} />
+      <Route exact path='/events/:eventid' component={EventPage} />
       <Route exact path="/createevent" component={App} />
     </Router>
   </Provider>,
