@@ -29,7 +29,9 @@ class LoginPage extends React.Component {
     this.props.fetchLogin({ ...this.state }).then(res => {
       if (!res) {
         this.props.errorNotification(this.props.errors);
+        return;
       }
+      this.props.history.push('/');
     });
   };
 

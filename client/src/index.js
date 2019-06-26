@@ -14,7 +14,7 @@ import Home from "./components/HomeComponent/Home";
 import EventsList from "./components/EventComponent/EventsList";
 import EventsForm from "./components/FormComponent";
 import EventPage from './components/EventComponent/EventPage';
-
+import PrivateRoute from "./components/PrivateRoute"
 const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 
 function App() {
@@ -26,16 +26,16 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <Link to="/calendar"> Calendar </Link>
-      <Link to="/home"> Home </Link>
+      <Link to="/"> Home </Link>
       <Link to="/events"> Events </Link>
       <Link to="/form"> Events Form </Link>
-      <Route exact path="/" component={App} />
-      <Route path="/calendar" component={CalendarEvents} />
-      <Route exact path="/home" component={Home} />
-      <Route exact path="/events" component={EventsList} />
-      <Route exact path='/events/:eventid' component={EventPage} />
-      <Route exact path="/createevent" component={App} />
-      <Route exact path="/form" component={EventsForm} />
+      <PrivateRoute exact path="/" component={Home} />
+      <PrivateRoute path="/calendar" component={CalendarEvents} />
+      <PrivateRoute exact path="/events" component={EventsList} />
+      <PrivateRoute path='/events/:eventid' component={EventPage} />
+      <PrivateRoute path="/createevent" component={Home} />
+      <PrivateRoute path="/form" component={EventsForm} />
+      <Route path="/login" component={Login} />
     </Router>
   </Provider>,
   rootElement

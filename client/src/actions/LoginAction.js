@@ -8,17 +8,24 @@ const tempKey = "https://corporate-event-planner.herokuapp.com/oauth/token?grant
 
 
 export const fetchLogin = user => dispatch => {
-  console.log(user);
+  // console.log(user);
   dispatch({ type: START_LOGGIN });
   return axios
-    .get(tempKey)
+    .post("https://corporate-event-planner.herokuapp.com/oauth/token", `grant_type=password&username=${user.username}&password=${user.password}`, {
+      headers: {
+        Authorization: "Basic bGFtYmRhLWNsaWVudDpsYW1iZGEtc2VjcmV0",
+        "Content-Type": "application/x-www-form-urlencoded"
+      }
+    })
     .then(res => {
+      dispatch({ type: SUCCESS_LOGGIN });
+      localStorage.setItem("token", res.data.access_token)
       return true;
     })
     .catch(err => {
       dispatch({
         type: FAILURE_LOGGIN,
-        payload: `err.response.data.error.error.join(" and ")`
+        payload: `Incorrect credentials`
       });
       return false;
     });

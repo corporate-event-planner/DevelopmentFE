@@ -31,9 +31,9 @@ class LoginPage extends React.Component {
           </Header>
 
             <Tab panes={[{
-              menuItem: 'Sign in', render: () => <LoginComponent />
+              menuItem: 'Sign in', render: () => <LoginComponent {...this.props} />
             }, {
-              menuItem: "Register", render: () => <RegisterComponent />
+              menuItem: "Register", render: () => <RegisterComponent {...this.props} />
             }]} />
 
           </Segment>
