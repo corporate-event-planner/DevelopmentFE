@@ -13,6 +13,8 @@ import CalendarEvents from "./components/CalendarComponent";
 import Home from "./components/HomeComponent/Home";
 import EventsList from "./components/EventComponent/EventsList";
 import EventsForm from "./components/FormComponent";
+import EventPage from './components/EventComponent/EventPage';
+
 const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 
 function App() {
@@ -31,6 +33,7 @@ ReactDOM.render(
       <Route path="/calendar" component={CalendarEvents} />
       <Route exact path="/home" component={Home} />
       <Route exact path="/events" component={EventsList} />
+      <Route exact path='/events/:eventid' component={EventPage} />
       <Route exact path="/createevent" component={App} />
       <Route exact path="/form" component={EventsForm} />
     </Router>
