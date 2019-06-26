@@ -10,10 +10,9 @@ import rootReducer from "./reducers";
 import logger from "redux-logger";
 import thunk from "redux-thunk";
 import CalendarEvents from "./components/CalendarComponent";
-import Home from './components/HomeComponent/Home'
-import EventsList from './components/EventComponent/EventsList'
-
-
+import Home from "./components/HomeComponent/Home";
+import EventsList from "./components/EventComponent/EventsList";
+import EventsForm from "./components/FormComponent";
 const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 
 function App() {
@@ -23,17 +22,17 @@ function App() {
 const rootElement = document.getElementById("root");
 ReactDOM.render(
   <Provider store={store}>
-
     <Router>
       <Link to="/calendar"> Calendar </Link>
       <Link to="/home"> Home </Link>
       <Link to="/events"> Events </Link>
+      <Link to="/form"> Events Form </Link>
       <Route exact path="/" component={App} />
       <Route path="/calendar" component={CalendarEvents} />
-      <Route exact path='/home' component={Home} />
+      <Route exact path="/home" component={Home} />
       <Route exact path="/events" component={EventsList} />
       <Route exact path="/createevent" component={App} />
-
+      <Route exact path="/form" component={EventsForm} />
     </Router>
   </Provider>,
   rootElement

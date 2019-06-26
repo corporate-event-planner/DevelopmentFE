@@ -8,7 +8,13 @@ import {
 } from "../../actions/NotifyAction";
 
 import {
-  Button, Form, Grid, Header, Tab, Message, Segment
+  Button,
+  Form,
+  Grid,
+  Header,
+  Tab,
+  Message,
+  Segment
 } from "semantic-ui-react";
 import { Notify } from "react-redux-notify";
 
@@ -33,9 +39,11 @@ class LoginPage extends React.Component {
 
   render() {
     return (
-
-      <Form size="large" onSubmit={this.handleSubmit}>
-
+      <Form
+        size="large"
+        onSubmit={this.handleSubmit}
+        loading={this.props.isFetching}
+      >
         <Form.Input
           fluid
           icon="user"
@@ -65,16 +73,17 @@ class LoginPage extends React.Component {
           type="submit"
         >
           Login
-                    </Button>
+        </Button>
       </Form>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  isRegistered: state.registerReducer.isRegistered,
-  isFetching: state.registerReducer.isFetching,
-  errors: state.registerReducer.errors
+  isLoggedIn: state.loginReducer.isLoggedIn,
+  isLoggedOut: state.loginReducer.isLoggedOut,
+  isFetching: state.loginReducer.isFetching,
+  errors: state.loginReducer.errors
 });
 
 const Login = styled(LoginPage)``;

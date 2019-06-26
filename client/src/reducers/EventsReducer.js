@@ -5,38 +5,40 @@ import {
     SEARCH_STARTING,
     SEARCH_SUCCESS,
     SEARCH_FAILURE
-} from '../actions/EventsAction'
+} from "../actions/EventsAction";
 
 const initialState = {
     events: [],
     isSearching: false,
     isFetching: false,
-    errors: '',
-}
+    errors: ""
+};
 
 export const eventsReducer = (state = initialState, action) => {
     switch (action.type) {
         case FETCH_EVENTS_START:
             return {
                 ...state,
-                error: '',
+                errors: "",
                 isFetching: true,
                 isSearching: true
-            }
+            };
         case FETCH_EVENTS_SUCCESS:
             return {
                 ...state,
-                error: '',
+                errors: "",
                 isSearching: false,
+                isFetching: false,
                 events: action.payload
-            }
+            };
         case FETCH_EVENTS_FAILURE:
             return {
                 ...state,
-                error: action.payload,
+                errors: action.payload,
+                isFetching: false,
                 isSearching: false
-            }
+            };
         default:
             return state;
     }
-}
+};

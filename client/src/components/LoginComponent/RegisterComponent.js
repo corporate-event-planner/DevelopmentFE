@@ -8,7 +8,13 @@ import {
 } from "../../actions/NotifyAction";
 
 import {
-  Button, Form, Grid, Header, Tab, Message, Segment
+  Button,
+  Form,
+  Grid,
+  Header,
+  Tab,
+  Message,
+  Segment
 } from "semantic-ui-react";
 import { Notify } from "react-redux-notify";
 
@@ -23,7 +29,7 @@ class RegisterPage extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.fetchLogin({ ...this.state }).then(res => {
+    this.props.fetchRegister({ ...this.state }).then(res => {
       if (!res) {
         this.props.errorNotification(this.props.errors);
       }
@@ -36,9 +42,11 @@ class RegisterPage extends React.Component {
 
   render() {
     return (
-
-      <Form size="large" onSubmit={this.handleSubmit}>
-
+      <Form
+        size="large"
+        onSubmit={this.handleSubmit}
+        loading={this.props.isFetching}
+      >
         <Form.Input
           fluid
           icon="user"
@@ -95,7 +103,7 @@ class RegisterPage extends React.Component {
           type="submit"
         >
           Register
-                    </Button>
+        </Button>
       </Form>
     );
   }

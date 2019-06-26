@@ -18,7 +18,7 @@ export const fetchRegister = user => dispatch => {
     .catch(err => {
       dispatch({
         type: FAILURE_REGISTER,
-        payload: err.response.data.error.error.join(" and ")
+        payload: `err.response.data.error.error.join(" and ")`
       });
       return false;
     });
