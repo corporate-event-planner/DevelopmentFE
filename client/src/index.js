@@ -25,15 +25,11 @@ const rootElement = document.getElementById("root");
 ReactDOM.render(
   <Provider store={store}>
     <Router>
-      <Link to="/calendar"> Calendar </Link>
-      <Link to="/home"> Home </Link>
-      <Link to="/events"> Events </Link>
-      <Link to="/form"> Events Form </Link>
       <Route exact path="/" component={App} />
       <Route path="/calendar" component={CalendarEvents} />
       <Route exact path="/home" component={Home} />
       <Route exact path="/events" component={EventsList} />
-      <Route exact path='/events/:eventid' component={EventPage} />
+      <Route exact path='/events/:eventid' render={props => <EventPage {...props} eventid={props.match.params.eventid} />} />
       <Route exact path="/createevent" component={App} />
       <Route exact path="/form" component={EventsForm} />
     </Router>
