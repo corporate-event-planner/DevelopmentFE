@@ -7,7 +7,7 @@ const headers = { "X-API-Key": key }
 
 export const getOneEvent = () => dispatch => {
     dispatch({ type: FETCH_ONEEVENT_START })
-    fetch('https://my.api.mockaroo.com/events/:id.json', {headers})
+    fetch('https://my.api.mockaroo.com/events/:eventid.json', {headers})
         .then(response => response.json() )
         .then(event => {
             console.log(event)

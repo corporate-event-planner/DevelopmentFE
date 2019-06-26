@@ -1,0 +1,20 @@
+@import '../../styles/variables.scss';
+
+.event-container {
+    width: 1000px;
+    margin: 80px auto;
+    border: 1px solid $gray-color;
+    border-radius: 10px;
+
+    .event-header {
+        height: 90px;
+        padding: 10px 60px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        background-color: $secondary-color;
+        color: $off-white;
+    }
+}

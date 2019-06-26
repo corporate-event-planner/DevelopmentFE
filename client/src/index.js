@@ -32,10 +32,10 @@ ReactDOM.render(
       <PrivateRoute exact path="/" component={Home} />
       <PrivateRoute path="/calendar" component={CalendarEvents} />
       <PrivateRoute exact path="/events" component={EventsList} />
-      <PrivateRoute path='/events/:eventid' component={EventPage} />
       <PrivateRoute path="/createevent" component={Home} />
       <PrivateRoute path="/form" component={EventsForm} />
       <Route path="/login" component={Login} />
+      <Route exact path='/events/:eventid' render={props => <EventPage {...props} eventid={props.match.params.eventid} />} />
     </Router>
   </Provider>,
   rootElement
