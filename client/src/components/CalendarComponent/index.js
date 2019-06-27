@@ -50,7 +50,7 @@ class CalendarEvents extends React.Component {
         <Calendar
           localizer={localizer}
           events={this.props.events.map((event, index) => ({
-            id: index,
+            id: event.eventid,
             title: event.name,
             allDay: false,
             start: new Date(event.date.split("|")[0]),
@@ -69,7 +69,7 @@ class CalendarEvents extends React.Component {
           }}
           selectable
           defaultView="week"
-          onDoubleClickEvent={(event, e) => console.log(event, e)}
+          onDoubleClickEvent={(event, e) => this.props.history.push(`events/${event.id}`)}
           components={components}
         />
         <ModalModalExample
