@@ -4,6 +4,8 @@ import moment from "moment";
 import "react-big-calendar/lib/sass/styles.scss";
 import ModalModalExample from "./Modal";
 import { connect } from "react-redux";
+import Navigation from '../NavComponent/Navigation'
+import Footer from '../FooterComponent/Footer'
 
 const localizer = momentLocalizer(moment);
 
@@ -21,6 +23,7 @@ class CalendarEvents extends React.Component {
   render() {
     return (
       <div>
+        <Navigation />
         <Calendar
           localizer={localizer}
           events={this.props.events}
@@ -46,6 +49,7 @@ class CalendarEvents extends React.Component {
             "MMMM Do, h:mm a"
           )}`}
         />
+        <Footer />
       </div>
     );
   }
