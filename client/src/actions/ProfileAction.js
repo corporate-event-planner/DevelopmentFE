@@ -5,14 +5,12 @@ export const PROFILE_UPDATE_SUCCESS = 'PROFILE_UPDATE_SUCCESS'
 
 export const updateProfile = (userid, info) => dispatch => {
     const drilledInfo = {
-        user: {
-            'userid': info.userid,
-            'username': info.username,
-            'email': info.email,
-            'companyname': info.companyname,
-            'role': info.role,
-            'image': info.image
-        }
+        'userid': info.userid,
+        'username': info.username,
+        'email': info.email,
+        'companyname': info.companyname,
+        'role': info.role,
+        'image': info.image
     }
 
     dispatch({ type: PROFILE_UPDATE_START })
