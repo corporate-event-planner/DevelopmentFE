@@ -13,48 +13,19 @@ class EventPage extends React.Component {
     state = {
         search: '',
         username: '',
-        eventID: {},
+        eventID: null,
     }
-
-    componentDidMount() {
-        const { eventid } = this.props.match.params;
-        this.setState({ eventID: eventid })
-        this.props.getOneEvent(eventid);
-        console.log('CDM')
-        // this.props.dummyData(eventid)
-    }
-
-    handleChanges = (event) => {
-        this.setState({ [event.target.name]: event.target.value })
-        console.log(this.props.addNewUser)
-    }
-
-    addUser = (event) => {
-        // console.log('addUser eventid', this.state.eventID)
-        // console.log('addUser name', this.state.username)
-        event.preventDefault();
-        this.props.addNewUser(this.state.eventID, this.state.username)
-    }
-
-    show = size => () => this.setState({ size, open: true });
-    close = () => this.setState({ open: false })
-
 
     render() {
         if (this.props.mountComplete === false) {
             return (
                 <Dimmer active inverted>
-
                     <Loader>Loading</Loader>
                 </Dimmer>
-
-
             )
         } else {
-            // console.log('Event Render', this.props.event.tasklist)
-            // all incorrect filter 'includes'
             const teamOrgTasks = this.props.event.tasklist.filter(task =>
-                task.category.includes('Service'));
+                task.category.includes('Graphic Design'));
 
             const promotionTasks = this.props.event.tasklist.filter(task =>
                 task.category.includes('Promtion'));
@@ -130,7 +101,7 @@ class EventPage extends React.Component {
                                 <Modal size={'small'} open={this.state.open} onClose={this.close}>
                                     <Modal.Header>New Task</Modal.Header>
                                     <Modal.Content>
-                                        <TaskModal />
+                                        <TaskModal eventID={this.props.match.params} />
                                     </Modal.Content>
                                     <Modal.Actions>
                                         <Button negative onClick={this.close}>Cancel</Button>
@@ -147,9 +118,31 @@ class EventPage extends React.Component {
             )
         }
     }
+
+    componentDidMount() {
+        const { eventid } = this.props.match.params;
+        // console.log( {eventid} )
+        // this.setState({ eventID })
+        this.props.getOneEvent(eventid);
+        // console.log('CDM', this.state.eventID)
+        // console.log('props log', this.props.match.params)
+    }
+
+    handleChanges = (event) => {
+        this.setState({ [event.target.name]: event.target.value })
+        console.log(this.props.addNewUser)
+    }
+
+    addUser = (event) => {
+        // console.log('addUser eventid', this.state.eventID)
+        // console.log('addUser name', this.state.username)
+        event.preventDefault();
+        this.props.addNewUser(this.state.eventID, this.state.username)
+    }
+
+    show = size => () => this.setState({ size, open: true });
+    close = () => this.setState({ open: false })
 }
-
-
 
 const mapStateToProps = (state) => {
     return {

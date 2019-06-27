@@ -1,28 +1,28 @@
 import {
-    ADD_TASK_START,
-    ADD_TASK_SUCCESS,
-} from '../actions/TaskActions'
+    PROFILE_UPDATE_START,
+    PROFILE_UPDATE_SUCCESS
+} from '../actions/ProfileAction'
 
-const initialState= {
-    event: [],
+const initialState = {
+    user: [],
     placingData: false,
     errors: '',
 }
 
-export const taskReducer = ( state = initialState, action ) => {
+export const profileReducer = ( state = initialState, action ) => {
     switch(action.type) {
-        case ADD_TASK_START:
+        case PROFILE_UPDATE_START:
             return {
                 ...state,
                 error: '',
                 placingData: true,
             }
-        case ADD_TASK_SUCCESS:
+        case PROFILE_UPDATE_SUCCESS:
             return {
                 ...state,
                 error: '',
                 placingData: false,
-                event: action.payload,
+                user: action.payload
             }
         default:
             return state;
