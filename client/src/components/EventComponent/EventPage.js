@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import Navigation from '../NavComponent/Navigation';
 import Footer from '../FooterComponent/Footer';
 import Tasks from './Tasks'
+import TaskModal from './TaskModal'
 import './EventPage.scss'
-import { Form, Button, Icon, Modal, Grid, Dimmer, Loader } from 'semantic-ui-react'
+import { Form, Button, Icon, Modal, Grid, Dimmer, Loader, Dropdown } from 'semantic-ui-react'
 import { getOneEvent, addNewUser } from '../../actions/EventAction'
 
 class EventPage extends React.Component {
@@ -15,9 +16,31 @@ class EventPage extends React.Component {
         eventID: {},
     }
 
-    render() {
-        // this.setState({eventID: {}})
+    componentDidMount() {
+        const { eventid } = this.props.match.params;
+        this.setState({ eventID: eventid })
+        this.props.getOneEvent(eventid);
+        console.log('CDM')
+        // this.props.dummyData(eventid)
+    }
 
+    handleChanges = (event) => {
+        this.setState({ [event.target.name]: event.target.value })
+        console.log(this.props.addNewUser)
+    }
+
+    addUser = (event) => {
+        // console.log('addUser eventid', this.state.eventID)
+        // console.log('addUser name', this.state.username)
+        event.preventDefault();
+        this.props.addNewUser(this.state.eventID, this.state.username)
+    }
+
+    show = size => () => this.setState({ size, open: true });
+    close = () => this.setState({ open: false })
+
+
+    render() {
         if (this.props.mountComplete === false) {
             return (
                 <Dimmer active inverted>
@@ -49,7 +72,7 @@ class EventPage extends React.Component {
                 task.category.includes('Other'));
 
             return (
-                <>
+                <div>
                     <Navigation />
                     <div className='event-container'>
                         <div className='event-header'>
@@ -103,70 +126,30 @@ class EventPage extends React.Component {
                             <div className='tasklist-container'>
                                 <Button icon labelPosition='left' primary size='small' onClick={this.show('small')}>
                                     <Icon name='check' /> Add Task
-                            </Button>
+                                </Button>
                                 <Modal size={'small'} open={this.state.open} onClose={this.close}>
                                     <Modal.Header>New Task</Modal.Header>
                                     <Modal.Content>
-                                        <form>
-                                            <h4>Task Description :</h4>
-                                            <input />
-                                            <h4>Assigned: </h4>
-                                            <input />
-                                            <h4>Due Date: </h4>
-                                            <h4>Category: </h4>
-
-                                        </form>
+                                        <TaskModal />
                                     </Modal.Content>
                                     <Modal.Actions>
                                         <Button negative onClick={this.close}>Cancel</Button>
-                                        <Button positive icon='checkmark' labelPosition='right' content='Yes' onClick={this.addNewTask} />
                                     </Modal.Actions>
                                 </Modal>
                                 <div className='tasklist-category'>
                                     <h3>Graphic Design</h3>
                                 </div>
-                                <Tasks tasks={teamOrgTasks} eventid={this.props.match.params} />
                             </div>
                         </div>
                     </div>
                     <Footer />
-                </>
+                </div>
             )
         }
     }
-
-    componentDidMount() {
-        const { eventid } = this.props.match.params;
-        this.setState({ eventID: eventid })
-        this.props.getOneEvent(eventid);
-        console.log('CDM')
-        // this.props.dummyData(eventid)
-    }
-
-    handleChanges = (event) => {
-        this.setState({ [event.target.name]: event.target.value })
-        console.log(this.props.addNewUser)
-    }
-
-    addUser = (event) => {
-        // console.log('addUser eventid', this.state.eventID)
-        // console.log('addUser name', this.state.username)
-        event.preventDefault();
-        this.props.addNewUser(this.state.eventID, this.state.username)
-    }
-
-    show = size => () => this.setState({ size, open: true });
-    close = () => this.setState({ open: false })
-
-    addNewTask = () => {
-        this.props.addNewTask(this.props.eventid, this.state.task)
-    }
-
-    // removeUser (userid) {
-    //     this.props.dummyData(eventid)
-    // }
-    //<button onClick={this.removeUser(user.userid)}>x</button>
 }
+
+
 
 const mapStateToProps = (state) => {
     return {

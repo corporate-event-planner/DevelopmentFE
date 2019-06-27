@@ -4,10 +4,6 @@ import {
     FETCH_ONEEVENT_FAILURE,
     ADD_USER_START,
     ADD_USER_SUCCESS,
-    ADD_TASK_START,
-    ADD_TASK_SUCCESS,
-    DUMB_DUMB_FIRE,
-    DUMB_DUMB_WIN
 } from '../actions/EventAction'
 
 const initialState = {
@@ -66,10 +62,6 @@ export const eventReducer = ( state = initialState, action ) => {
                 ...state,
                 error: '',
                 placingData: false,
-                event: action.payload
-            }
-        case DUMB_DUMB_WIN:
-            return {
                 event: action.payload
             }
         default:

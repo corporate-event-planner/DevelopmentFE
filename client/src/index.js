@@ -11,7 +11,7 @@ import logger from "redux-logger";
 import thunk from "redux-thunk";
 import CalendarEvents from "./components/CalendarComponent";
 import Home from "./components/HomeComponent/Home";
-import EventsList from "./components/EventComponent/EventsList";
+import EventsList from "./components/EventsComponent/EventsList";
 import EventsForm from "./components/FormComponent";
 import EventPage from './components/EventComponent/EventPage';
 import PrivateRoute from "./components/PrivateRoute"
