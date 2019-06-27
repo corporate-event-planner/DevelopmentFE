@@ -4,6 +4,9 @@ export const FETCH_ONEEVENT_START = 'FETCH_ONEEVENT_START';
 export const FETCH_ONEEVENT_SUCCESS = 'FETCH_ONEEVENT_SUCCESS';
 export const FETCH_ONEEVENT_FAILURE = 'FETCH_ONEEVENT_FAILURE';
 
+export const ADD_USER_START = 'ADD_USER_START'
+export const ADD_USER_SUCCESS = 'ADD_USER_SUCCESS'
+
 export const DUMB_DUMB_FIRE = 'DUMB_DUMB_FIRE';
 export const DUMB_DUMB_WIN = 'DUMB_DUMB_WIN';
 
@@ -62,6 +65,18 @@ export const getOneEvent = (eventid) => dispatch => {
         .then(event => {
             dispatch({ type: FETCH_ONEEVENT_SUCCESS, payload: event.data })
             // console.log('data do what data does')
+        })
+        .catch(error => {
+            console.log('catch error', error.response)
+        })
+}
+
+export const addUser = (userlist) => dispatch => {
+    dispatch({ type: ADD_USER_START })
+    axiosWithAuth()
+        .put(`https://corporate-event-planner.herokuapp.com/events/edit/${eventid}`, userlist)
+        .then(event => {
+            dispatch ({ type: ADD_USER_SUCCESS })
         })
         .catch(error => {
             console.log('catch error', error.response)

@@ -5,33 +5,17 @@ import Navigation from '../NavComponent/Navigation';
 import Footer from '../FooterComponent/Footer';
 import Tasks from './Tasks'
 import './EventPage.scss'
+import { Form } from 'semantic-ui-react'
 import { getOneEvent, dummyData } from '../../actions/EventAction'
 
 class EventPage extends React.Component {
     state = {
         search: '',
-        tasklist: [
-            {
-                "taskid": 5,
-                "name": "Reservations",
-                "description": "Make Hotel Reservations",
-                "assigned": "John",
-                "completed": false,
-                "duedate": "8-1-2019",
-                "category": "Service",
-                "purchase": []
-                },
-                {
-                "taskid": 6,
-                "name": "RSVP",
-                "description": "Have all employees either RSVP or opt out",
-                "assigned": "Michelle",
-                "completed": false,
-                "duedate": "7-15-2019",
-                "category": "Task",
-                "purchase": []
-                }
-        ]
+        userlist: [{
+            user:  {
+                username: ''
+            }
+        }]
     }
 
     render() {
@@ -77,6 +61,26 @@ class EventPage extends React.Component {
                             <p>{this.props.event.description}</p>
                         </div>
                     </div>
+                    <div className='event-users'>
+                        <div className='event-users-header'>
+                            <h4>Users</h4>
+                            <Form.Input
+                            icon='search'
+                            size='medium'
+                            name='username'
+                            placeholder='Find events'
+                            value={this.state.search}
+                            onChange={this.handleChanges}
+                            /><button onClick={this.addUser}>Add User</button>
+                        </div>
+                        <div className='event-users-list'>
+                        {this.props.event.userList.map(user => (
+                            <div className='event-user'>
+                                {user.username} <button>x</button>
+                            </div>
+                        ))}
+                        </div>
+                    </div>
                     <div className='event-tasks'>
                         <div className='tasklist-container'>
                             <div className='tasklist-category'>
@@ -96,6 +100,16 @@ class EventPage extends React.Component {
         const { eventid } = this.props.match.params;
         this.props.getOneEvent(eventid);
         this.props.dummyData(eventid)
+    }
+
+    handleChanges = (event) => {
+        this.setState({ [event.target.name]: event.target.value})
+        console.log('change handerl', this.state.userlist.user.username)
+    }
+
+    addUser (event) {
+        event.preventDefault();
+        this.props.addUser(this.state.userlist)
     }
 }
 
