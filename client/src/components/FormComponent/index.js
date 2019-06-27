@@ -58,19 +58,28 @@ class EventsForm extends React.Component {
     this.setState({ activeIndex: newIndex });
   };
 
+  handleOnSubmit = () => {
+    const { name, description, budget } = this.state;
+
+    this.props.postEvent({ name, description, budget, date: this.props.date }).then(res => {
+      if (!res) {
+        this.props.errorNotification(this.props.errors);
+        return;
+      }
+      this.props.closeModal().then(res => {
+        this.props.successNotification("Event Created");
+
+      });
+    });
+  }
+
   render() {
     const { activeIndex } = this.state;
 
     return (
       <Form
         loading={this.props.isFetching}
-        onSubmit={() => {
-          this.props.postEvent(this.state).then(res => {
-            if (!res) {
-              this.props.errorNotification(this.props.errors);
-            }
-          });
-        }}
+        onSubmit={this.handleOnSubmit}
       >
         <Notify />
         <Grid columns="two">
@@ -115,7 +124,7 @@ class EventsForm extends React.Component {
               </Form.Field>
             </Grid.Column>
           </Grid.Row>
-          <Grid.Row stretched>
+          {/* <Grid.Row stretched>
             <Grid.Column>
               <Accordion as={Menu} vertical>
                 <Menu.Item>
@@ -145,7 +154,7 @@ class EventsForm extends React.Component {
                 </Menu.Item>
               </Accordion>
             </Grid.Column>
-          </Grid.Row>
+          </Grid.Row> */}
           <Grid.Row>
             <Grid.Column>
               <Button
@@ -175,5 +184,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { postEvent, errorNotification }
+  { postEvent, errorNotification, successNotification }
 )(EventsForm);
