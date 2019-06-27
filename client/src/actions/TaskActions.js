@@ -7,7 +7,7 @@ export const addNewTask = (eventid, task) => dispatch => {
     const drilledTask = {
         'tasklist': [
             {
-                'description': task.description,
+                'name': task.name,
                 'assigned': task.assigned,
                 'duedate': task.duedate,
                 'category': task.category,
@@ -23,10 +23,10 @@ export const addNewTask = (eventid, task) => dispatch => {
             }
         ]
     }
-
+    console.log(task)
     dispatch ({ type: ADD_TASK_START })
     axiosWithAuth()
-        .put(`https://corporate-event-planner.herokuapp.com/events/${eventid}`, drilledTask)
+        .put(`https://corporate-event-planner.herokuapp.com/events/edit/${eventid}`, drilledTask)
         .then(event=> {
             dispatch({ type: ADD_TASK_SUCCESS, payload: event.data})
         })

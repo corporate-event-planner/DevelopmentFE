@@ -12,7 +12,7 @@ class TaskModal extends React.Component {
         super(props)
         this.state = {
             event: '',
-            descripton: '',
+            name: '',
             assigned: '',
             duedate: new Date(),
             category: '',
@@ -23,9 +23,15 @@ class TaskModal extends React.Component {
         }
     }
 
-
     render() {
+        console.log('name', this.state.name)
         console.log('duedate',this.state.duedate)
+        console.log('category', this.state.category)
+        console.log('purchase', this.state.purchaseDescription)
+        console.log('price', this.state.price)
+        console.log('qty', this.state.qty)
+        console.log('vendorname', this.state.vendorname)
+        
         return(
             <div className='task-form'>
                 <Form>
@@ -39,10 +45,11 @@ class TaskModal extends React.Component {
                     onChange={(event) => this.changeCategory(event.target.textContent)}/>
 
                 <Form.Field 
-                    label='Description'
+                    label='Name'
                     control={TextArea}
-                    name='description' 
-                    value={this.state.description} />
+                    name='name' 
+                    value={this.state.name} 
+                    onChange={this.changeHandler}/>
 
                 <Form.Group>
                     <label>Assigned</label>
@@ -68,7 +75,7 @@ class TaskModal extends React.Component {
                     label='Vendor Name'
                     name='vendorname'
                     control={Input}
-                    value={this.state.description}
+                    value={this.state.vendorname}
                     onChange={this.changeHandler} />
 
                 <Form.Field>
@@ -86,9 +93,9 @@ class TaskModal extends React.Component {
 
                 <Form.Field 
                     label='Quantity'
-                    name='quantity'
+                    name='qty'
                     control={Input}
-                    value={this.state.quanity}
+                    value={this.state.qty}
                     onChange={this.changeHandler} />
                 </Form>
                 <Button 

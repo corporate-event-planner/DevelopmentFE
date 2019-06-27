@@ -42,6 +42,8 @@ class EventPage extends React.Component {
             const otherTasks = this.props.event.tasklist.filter(task =>
                 task.category.includes('Other'));
 
+            const { eventid } = this.props.match.params
+
             return (
                 <div>
                     <Navigation />
@@ -101,7 +103,7 @@ class EventPage extends React.Component {
                                 <Modal size={'small'} open={this.state.open} onClose={this.close}>
                                     <Modal.Header>New Task</Modal.Header>
                                     <Modal.Content>
-                                        <TaskModal eventID={this.props.match.params} />
+                                        <TaskModal eventID={eventid} />
                                     </Modal.Content>
                                     <Modal.Actions>
                                         <Button negative onClick={this.close}>Cancel</Button>
@@ -109,6 +111,7 @@ class EventPage extends React.Component {
                                 </Modal>
                                 <div className='tasklist-category'>
                                     <h3>Graphic Design</h3>
+                                    <Tasks tasks={productionTasks} />
                                 </div>
                             </div>
                         </div>
@@ -121,11 +124,8 @@ class EventPage extends React.Component {
 
     componentDidMount() {
         const { eventid } = this.props.match.params;
-        // console.log( {eventid} )
-        // this.setState({ eventID })
         this.props.getOneEvent(eventid);
-        // console.log('CDM', this.state.eventID)
-        // console.log('props log', this.props.match.params)
+        console.log('props log', eventid)
     }
 
     handleChanges = (event) => {
