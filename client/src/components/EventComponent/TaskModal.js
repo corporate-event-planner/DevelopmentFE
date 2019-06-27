@@ -8,19 +8,24 @@ import "react-datepicker/dist/react-datepicker.css";
 import { addNewTask } from '../../actions/TaskActions'
 
 class TaskModal extends React.Component {
-    state = {
-        event: '',
-        descripton: '',
-        assigned: '',
-        duedate: new Date(),
-        category: '',
-        purchaseDescription: '',
-        price: '',
-        qty: '',
-
+    constructor(props){
+        super(props)
+        this.state = {
+            event: '',
+            descripton: '',
+            assigned: '',
+            duedate: new Date(),
+            category: '',
+            purchaseDescription: '',
+            price: '',
+            qty: '',
+            vendorname: '',
+        }
     }
 
+
     render() {
+        console.log('duedate',this.state.duedate)
         return(
             <div className='task-form'>
                 <Form>
@@ -46,13 +51,6 @@ class TaskModal extends React.Component {
                     <Form.Field
                         control={Radio}
                         />
-                {/* <Dropdown 
-                    name={this.state.category}
-                    placeholder='cat' 
-                    value={categoryOptions.text}
-                    selection 
-                    options={categoryOptions} 
-                    onChange={(event) => this.changeHandler(event.target.textContent)}/> */}
 
                 <DatePicker
                     selected={this.state.duedate}
@@ -118,7 +116,7 @@ class TaskModal extends React.Component {
       }
 
     addNewTask = () => {
-        this.props.addNewTask(this.props.eventid, this.state.task)
+        this.props.addNewTask(this.props.eventID, this.state)
     }
 }
 

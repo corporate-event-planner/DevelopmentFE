@@ -31,7 +31,7 @@ ReactDOM.render(
       <PrivateRoute path="/createevent" component={Home} />
       <PrivateRoute path="/form" component={EventsForm} />
       <Route path="/login" component={Login} />
-      <Route path="/events/:eventid" component={EventPage}/>
+      <Route exact path="/events/:eventid" component={EventPage}/>
     </Router>
   </Provider>,
   rootElement
