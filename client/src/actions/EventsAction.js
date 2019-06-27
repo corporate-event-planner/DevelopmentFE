@@ -36,6 +36,10 @@ export const postEvent = event => dispatch => {
         });
 };
 
+export const deleteEvent = id => dispatch => {
+
+}
+
 export const searchEvents = search => dispatch => {
     console.log(search);
     dispatch({ type: SEARCH_STARTING });
