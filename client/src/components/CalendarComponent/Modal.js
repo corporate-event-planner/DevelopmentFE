@@ -6,9 +6,7 @@ import EventsForm from "../FormComponent";
 import moment from "moment";
 
 const ModalModalExample = props => (
-  <Modal open={props.modal} onClose={() => {
-    // props.successNotification("Test");
-  }} closeIcon>
+  <Modal open={props.modal} onClose={props.onClose} closeIcon>
     <Modal.Header>
       {" "}
       Begins: {`${moment(props.eventStarts).format("MMMM Do, h:mm a")}`} / Ends: {`${moment(props.eventEnds).format("MMMM Do, h:mm a")}`}

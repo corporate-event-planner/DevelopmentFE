@@ -47,7 +47,7 @@ export const eventsReducer = (state = initialState, action) => {
                 errors: "",
                 isSearching: false,
                 isFetching: false,
-                // events: action.payload
+                events: [...state.events, action.payload]
             };
         case FETCH_EVENTS_FAILURE:
             return {
