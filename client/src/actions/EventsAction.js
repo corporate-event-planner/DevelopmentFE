@@ -9,6 +9,9 @@ export const ADD_EVENTS_START = "ADD_EVENTS_START";
 export const SEARCH_STARTING = "SEARCH_STARTING";
 export const SEARCH_SUCCESS = "SEARCH_SUCCESS";
 export const SEARCH_FAILURE = "SEARCH_FAILURE";
+export const DELETE_ONE_START = "DELETE_ONE_START"
+export const DELETE_ONE_SUCCESS = "DELETE_ONE_SUCCESS"
+export const DELETE_ONE_FAILURE = "DELETE_ONE_FAILURE"
 
 export const getEvents = () => dispatch => {
     dispatch({ type: FETCH_EVENTS_START });
@@ -36,8 +39,13 @@ export const postEvent = event => dispatch => {
         });
 };
 
-export const deleteEvent = id => dispatch => {
-
+export const deleteEvent = event => dispatch => {
+    dispatch({ type: DELETE_ONE_START });
+    return axiosWithAuth().delete(`https://corporate-event-planner.herokuapp.com/events/delete/${event.eventid}`).then(res => {
+        dispatch({ type: DELETE_ONE_SUCCESS, payload: event })
+    }).catch(err => {
+        dispatch({ type: DELETE_ONE_FAILURE })
+    });
 }
 
 export const searchEvents = search => dispatch => {

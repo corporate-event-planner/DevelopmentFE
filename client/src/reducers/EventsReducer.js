@@ -7,7 +7,10 @@ import {
     SEARCH_FAILURE,
     ADD_EVENTS_FAILURE,
     ADD_EVENTS_SUCCESS,
-    ADD_EVENTS_START
+    ADD_EVENTS_START,
+    DELETE_ONE_FAILURE,
+    DELETE_ONE_START,
+    DELETE_ONE_SUCCESS
 } from "../actions/EventsAction";
 
 const initialState = {
@@ -64,6 +67,19 @@ export const eventsReducer = (state = initialState, action) => {
                 isFetching: false,
                 isSearching: false
             };
+        case DELETE_ONE_START:
+            return {
+                ...state,
+                errors: "",
+                isFetching: true
+            }
+        case DELETE_ONE_SUCCESS:
+            return {
+                ...state,
+                errors: "",
+                isFetching: false,
+                events: state.events.filter(event => event.eventid !== action.payload.eventid)
+            }
         default:
             return state;
     }

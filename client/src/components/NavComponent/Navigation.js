@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 import './Navigation.scss'
 
-const Navigation = ( ) => {
-    return(
+const Navigation = () => {
+    return (
         <div className='navigation-container'>
             <div className='navigation-bar'>
                 <div className='title'><h1>Corporate Event Planner</h1></div>
@@ -12,7 +12,8 @@ const Navigation = ( ) => {
                     <Link className='nav-link' to='/' >Home</Link> <span>|</span>
                     <Link className='nav-link' to="/calendar"> Calendar </Link> <span>|</span>
                     <Link className='nav-link' to='/events'>Events</Link> <span>|</span>
-                    <Link className='nav-link' to="/form"> Add Event </Link>
+                    <Link className='nav-link' to="/form"> Add Event </Link> <span>|</span>
+                    <Link className='nav-link' to="/editprofile"> Edit Profile </Link>
                 </div>
             </div>
         </div>

@@ -14,7 +14,8 @@ import Home from "./components/HomeComponent/Home";
 import EventsList from "./components/EventsComponent/EventsList";
 import EventsForm from "./components/FormComponent";
 import EventPage from './components/EventComponent/EventPage';
-import PrivateRoute from "./components/PrivateRoute"
+import PrivateRoute from "./components/PrivateRoute";
+import EditProfile from "./components/ProfileComponent/edit"
 const store = createStore(rootReducer, applyMiddleware(thunk, logger));
 
 function App() {
@@ -30,6 +31,7 @@ ReactDOM.render(
       <PrivateRoute exact path="/events" component={EventsList} />
       <PrivateRoute path="/createevent" component={Home} />
       <PrivateRoute path="/form" component={EventsForm} />
+      <PrivateRoute path="/editprofile" component={EditProfile} />
       <Route path="/login" component={Login} />
       <Route path="/events/:eventid" component={EventPage}/>
     </Router>

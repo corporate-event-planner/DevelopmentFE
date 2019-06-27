@@ -3,7 +3,7 @@ import {
     FETCH_ONEEVENT_SUCCESS,
     FETCH_ONEEVENT_FAILURE,
     ADD_USER_START,
-    ADD_USER_SUCCESS,
+    ADD_USER_SUCCESS
 } from '../actions/EventAction'
 
 const initialState = {
@@ -14,8 +14,8 @@ const initialState = {
     mountComplete: false,
 }
 
-export const eventReducer = ( state = initialState, action ) => {
-    switch(action.type) {
+export const eventReducer = (state = initialState, action) => {
+    switch (action.type) {
         case FETCH_ONEEVENT_START:
             return {
                 ...state,
@@ -37,19 +37,6 @@ export const eventReducer = ( state = initialState, action ) => {
                 ...state,
                 error: action.payload,
                 isSearching: false
-            }
-        case ADD_USER_START:
-            return {
-                ...state,
-                placingData: true,
-                error: ''
-            }
-        case ADD_USER_SUCCESS:
-            return {
-                ...state,
-                error: '',
-                placingData: false,
-                event: action.payload
             }
         case ADD_USER_START:
             return {
