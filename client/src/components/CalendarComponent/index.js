@@ -4,6 +4,9 @@ import moment from "moment";
 import "react-big-calendar/lib/sass/styles.scss";
 import ModalModalExample from "./Modal";
 import { connect } from "react-redux";
+import Navigation from '../NavComponent/Navigation'
+import Footer from '../FooterComponent/Footer'
+
 import { Notify } from "react-redux-notify";
 import { getEvents } from "../../actions/EventsAction";
 import { Card, Button } from "semantic-ui-react";
@@ -42,6 +45,7 @@ class CalendarEvents extends React.Component {
   render() {
     return (
       <div>
+        <Navigation />
         <Notify />
         <Calendar
           localizer={localizer}
@@ -74,6 +78,7 @@ class CalendarEvents extends React.Component {
           eventStarts={`${this.state.event.eventStarts.toLocaleString()}`}
           eventEnds={`${this.state.event.eventEnds.toLocaleString()}`}
         />
+        <Footer />
       </div>
     );
   }

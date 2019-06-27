@@ -1,13 +1,21 @@
 import {
     FETCH_ONEEVENT_START,
     FETCH_ONEEVENT_SUCCESS,
-    FETCH_ONEEVENT_FAILURE, 
+    FETCH_ONEEVENT_FAILURE,
+    ADD_USER_START,
+    ADD_USER_SUCCESS,
+    ADD_TASK_START,
+    ADD_TASK_SUCCESS,
+    DUMB_DUMB_FIRE,
+    DUMB_DUMB_WIN
 } from '../actions/EventAction'
 
 const initialState = {
-    events: [],
-    isSearching: false,
+    event: [],
+    fetchingData: false,
+    placingData: false,
     errors: '',
+    mountComplete: false,
 }
 
 export const eventReducer = ( state = initialState, action ) => {
@@ -23,13 +31,44 @@ export const eventReducer = ( state = initialState, action ) => {
                 ...state,
                 error: '',
                 isSearching: false,
-                event: action.payload
+                event: action.payload,
+                mountComplete: true,
             }
         case FETCH_ONEEVENT_FAILURE:
             return {
                 ...state,
                 error: action.payload,
                 isSearching: false
+            }
+        case ADD_USER_START:
+            return {
+                ...state,
+                placingData: true,
+                error: ''
+            }
+        case ADD_USER_SUCCESS:
+            return {
+                ...state,
+                error: '',
+                placingData: false,
+                event: action.payload
+            }
+        case ADD_USER_START:
+            return {
+                ...state,
+                placingData: true,
+                error: ''
+            }
+        case ADD_USER_SUCCESS:
+            return {
+                ...state,
+                error: '',
+                placingData: false,
+                event: action.payload
+            }
+        case DUMB_DUMB_WIN:
+            return {
+                event: action.payload
             }
         default:
             return state;
