@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Form, Button, Icon, Modal, Dropdown } from 'semantic-ui-react'
 
 import Navigation from '../NavComponent/Navigation';
 import Footer from '../FooterComponent/Footer';
 import Tasks from './Tasks'
+import TaskModal from './TaskModal'
 import './EventPage.scss'
-import { Form, Button, Icon, Modal } from 'semantic-ui-react'
 import { getOneEvent, addNewUser } from '../../actions/EventAction'
 
 class EventPage extends React.Component {
@@ -16,7 +17,6 @@ class EventPage extends React.Component {
     }
 
     render() {
-        // this.setState({eventID: {}})
         if (this.props.mountComplete === false){
             return (
             <h1>Loading</h1>
@@ -41,6 +41,9 @@ class EventPage extends React.Component {
     
             const otherTasks = this.props.event.tasklist.filter(task =>
                 task.category.includes('Other'));
+
+            // const userOptions = this.props.event.tasklist.userList.user.username.map(user =>
+            //     user)
     
         return(
             <>
@@ -89,15 +92,7 @@ class EventPage extends React.Component {
                             <Modal size={'small'} open={this.state.open} onClose={this.close}>
                                 <Modal.Header>New Task</Modal.Header>
                                 <Modal.Content>
-                                    <form>
-                                        <h4>Task Description :</h4>
-                                        <input />
-                                        <h4>Assigned: </h4>
-                                        <input />
-                                        <h4>Due Date: </h4>
-                                        <h4>Category: </h4>
-
-                                    </form>
+                                    <TaskModal />
                                 </Modal.Content>
                                 <Modal.Actions>
                                     <Button negative onClick={this.close}>Cancel</Button>
