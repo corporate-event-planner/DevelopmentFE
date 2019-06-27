@@ -1,6 +1,6 @@
 import React from 'react';
 import _ from 'lodash';
-import { Dropdown, Form, Radio, TextArea } from 'semantic-ui-react';
+import { Dropdown, Form, Radio, TextArea, Input, Label } from 'semantic-ui-react';
 import DatePicker from 'react-datepicker';
 import { connect } from 'react-redux';
 
@@ -13,7 +13,11 @@ class TaskModal extends React.Component {
         descripton: '',
         assigned: '',
         duedate: new Date(),
-        category: ''
+        category: '',
+        purchaseDescription: '',
+        price: '',
+        qty: '',
+
     }
 
     render() {
@@ -27,15 +31,18 @@ class TaskModal extends React.Component {
                     value={categoryOptions.text}
                     selection 
                     options={categoryOptions} 
-                    onChange={(event) => this.changeHandler(event.target.textContent)}/>
+                    onChange={(event) => this.changeCategory(event.target.textContent)}/>
+
                 <Form.Field 
                     label='Description'
                     control={TextArea}
                     name='description' 
                     value={this.state.description} />
+
                 <Form.Group>
                     <label>Assigned</label>
                 </Form.Group>
+                
                     <Form.Field
                         control={Radio}
                         />
@@ -46,20 +53,59 @@ class TaskModal extends React.Component {
                     selection 
                     options={categoryOptions} 
                     onChange={(event) => this.changeHandler(event.target.textContent)}/> */}
+
                 <DatePicker
                     selected={this.state.duedate}
                     onChange={this.handleDate} />
                 
+                <h4>Purchase</h4>
+                <Form.Field
+                    label='Purchase Description'
+                    name='purchaseDescription'
+                    control={Input}
+                    value={this.state.purchaseDescription}
+                    onChange={this.changeHandler} />
+
+                <Form.Field
+                    label='Vendor Name'
+                    name='vendorname'
+                    control={Input}
+                    value={this.state.description}
+                    onChange={this.changeHandler} />
+
+                <Form.Field>
+                <label>Price</label>
+                <Input type="text" placeholder="Amount">
+                    <Label basic>$</Label>
+                    <input
+                    name="price"
+                    onChange={this.changeHandler}
+                    value={this.state.price}
+                    />
+                    <Label>.00</Label>
+                </Input>
+                </Form.Field>
+
+                <Form.Field 
+                    label='Quantity'
+                    name='quantity'
+                    control={Input}
+                    value={this.state.quanity}
+                    onChange={this.changeHandler} />
                 </Form>
             </div>
         )
     }
 
-    changeHandler = (event) => {
+    changeCategory = (event) => {
         this.setState({category: event})
     }
 
-    handleDate= (date) => {
+    changeHandler = (event) => {
+        this.setState({ [event.target.name]: event.target.value })
+    }
+
+    handleDate = (date) => {
         this.setState({
           duedate: date
         });
