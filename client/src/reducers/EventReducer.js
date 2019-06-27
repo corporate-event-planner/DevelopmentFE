@@ -24,7 +24,9 @@ export const eventReducer = ( state = initialState, action ) => {
             return {
                 ...state,
                 error: '',
-                isSearching: true
+                isSearching: true,
+                event: [],
+                mountComplete: false,
             }
         case FETCH_ONEEVENT_SUCCESS:
             return {
