@@ -7,23 +7,34 @@ import { connect } from "react-redux";
 import Navigation from '../NavComponent/Navigation'
 import Footer from '../FooterComponent/Footer'
 
+import { Notify } from "react-redux-notify";
 const localizer = momentLocalizer(moment);
 
 class CalendarEvents extends React.Component {
   state = {
     modal: false,
-    eventStarts: "",
-    eventEnds: ""
+    event: {
+      eventStarts: "",
+      eventEnds: "",
+      title: "",
+    }
   };
 
-  handleClose = () => {
-    this.setState({ modal: false });
-  };
+
+  closeModal = () => {
+    return new Promise((resolve, reject) => {
+      this.setState({
+        modal: false
+      })
+      resolve();
+    })
+  }
 
   render() {
     return (
       <div>
         <Navigation />
+        <Notify />
         <Calendar
           localizer={localizer}
           events={this.props.events}
@@ -32,22 +43,22 @@ class CalendarEvents extends React.Component {
           onSelectSlot={e => {
             this.setState({
               modal: true,
-              eventStarts: e.start,
-              eventEnds: e.end
+              event: {
+                eventStarts: e.start,
+                eventEnds: e.end
+              }
             });
           }}
           selectable
-        // view="week"
+          defaultView='week'
         />
         <ModalModalExample
           modal={this.state.modal}
-          onClose={this.handleClose}
-          eventStarts={`${moment(
-            this.state.eventStarts.toLocaleString()
-          ).format("MMMM Do, h:mm a")}`}
-          eventEnds={`${moment(this.state.eventEnds.toLocaleString()).format(
-            "MMMM Do, h:mm a"
-          )}`}
+          onClose={this.closeModal}
+          eventStarts={`${
+            this.state.event.eventStarts.toLocaleString()
+            }`}
+          eventEnds={`${this.state.event.eventEnds.toLocaleString()}`}
         />
         <Footer />
       </div>

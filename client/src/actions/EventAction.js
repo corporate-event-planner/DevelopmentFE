@@ -74,7 +74,7 @@ export const getOneEvent = (eventid) => dispatch => {
 export const addUser = (userlist) => dispatch => {
     dispatch({ type: ADD_USER_START })
     axiosWithAuth()
-        .put(`https://corporate-event-planner.herokuapp.com/events/edit/${eventid}`, userlist)
+        .put(`https://corporate-event-planner.herokuapp.com/events/edit/${userlist}`, userlist)
         .then(event => {
             dispatch ({ type: ADD_USER_SUCCESS })
         })

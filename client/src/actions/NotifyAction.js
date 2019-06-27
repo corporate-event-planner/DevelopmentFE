@@ -20,8 +20,8 @@ const myErrorNotification = {
   canDismiss: true
 };
 
-export const successNotification = () => dispatch => {
-  return dispatch(createNotification(mySuccessNotification));
+export const successNotification = (message) => dispatch => {
+  return dispatch(createNotification({ ...mySuccessNotification, message: message }));
 };
 
 export const errorNotification = message => dispatch => {
