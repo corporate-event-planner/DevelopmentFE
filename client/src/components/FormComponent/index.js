@@ -14,6 +14,7 @@ import {
   successNotification,
   errorNotification
 } from "../../actions/NotifyAction";
+import styled from "styled-components"
 import { Notify } from "react-redux-notify";
 
 const ColorForm = (
@@ -28,15 +29,33 @@ const ColorForm = (
 );
 
 const SizeForm = (
-  <Form>
-    <Form.Group grouped>
-      <Form.Radio label="Small" name="size" type="radio" value="small" />
-      <Form.Radio label="Medium" name="size" type="radio" value="medium" />
-      <Form.Radio label="Large" name="size" type="radio" value="large" />
-      <Form.Radio label="X-Large" name="size" type="radio" value="x-large" />
-    </Form.Group>
-  </Form>
+  <Form.Group widths='equal'>
+    <Form.Field>
+      <label>First name</label>
+      <Input fluid placeholder='First name' />
+    </Form.Field>
+    <Form.Field>
+      <label>Middle name</label>
+      <Input fluid placeholder='Middle name' />
+    </Form.Field>
+    <Form.Field>
+      <label>Last name</label>
+      <Input fluid placeholder='Last name' />
+    </Form.Field>
+  </Form.Group>
 );
+
+const panels = [
+  {
+    key: 'details',
+    title: 'Optional Details',
+    content: {
+      as: Form.Input,
+      label: 'Maiden Name',
+      placeholder: 'Maiden Name',
+    },
+  },
+]
 
 class EventsForm extends React.Component {
   state = {
@@ -155,20 +174,40 @@ class EventsForm extends React.Component {
               </Accordion>
             </Grid.Column>
           </Grid.Row> */}
+          <Grid.Row stretched>
+            <Grid.Column stretched>
+
+              <Accordion as={Menu} vertical style={{ "width": "100%" }}>
+                <Menu.Item>
+                  <Accordion.Title
+                    active={activeIndex === 0}
+                    content='Size'
+                    index={0}
+                    onClick={this.handleClick}
+                  />
+                  <Accordion.Content active={activeIndex === 0} content={SizeForm} />
+                </Menu.Item>
+              </Accordion>
+            </Grid.Column>
+          </Grid.Row>
           <Grid.Row>
             <Grid.Column>
-              <Button
-                onClick={this.props.onClose}
-                positive
-                labelPosition="right"
-                icon="checkmark"
-                content="Create Event"
-              />
-            </Grid.Column>
-            <Grid.Column textAlign="right">
-              <Button onClick={this.props.onClose} negative>
-                Cancel
+
+              <Button.Group>
+                <Button onClick={(e) => {
+                  e.preventDefault();
+                  this.props.closeModal()
+                }} negative>
+                  Cancel
               </Button>
+                <Button.Or />
+                <Button
+                  positive
+                  labelPosition="right"
+                  icon="checkmark"
+                  content="Create Event"
+                />
+              </Button.Group>
             </Grid.Column>
           </Grid.Row>
         </Grid>
@@ -181,6 +220,12 @@ const mapStateToProps = state => ({
   isFetching: state.eventsReducer.isFetching,
   errors: state.eventsReducer.errors
 });
+
+const StyledAccordion = styled(Accordion)`
+  &&& {
+    width: 100%;
+  }
+`
 
 export default connect(
   mapStateToProps,
