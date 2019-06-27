@@ -1,8 +1,10 @@
 import React from 'react';
 import _ from 'lodash';
 import { Dropdown, Form, Radio, TextArea } from 'semantic-ui-react';
+import DatePicker from 'react-datepicker';
 import { connect } from 'react-redux';
 
+import "react-datepicker/dist/react-datepicker.css";
 import { getOneEvent, addNewUser } from '../../actions/EventAction'
 
 class TaskModal extends React.Component {
@@ -10,7 +12,7 @@ class TaskModal extends React.Component {
         event: '',
         descripton: '',
         assigned: '',
-        duedate: '',
+        duedate: new Date(),
         category: ''
     }
 
@@ -29,7 +31,8 @@ class TaskModal extends React.Component {
                 <Form.Field 
                     label='Description'
                     control={TextArea}
-                    name='description' />
+                    name='description' 
+                    value={this.state.description} />
                 <Form.Group>
                     <label>Assigned</label>
                 </Form.Group>
@@ -38,12 +41,15 @@ class TaskModal extends React.Component {
                         />
                 {/* <Dropdown 
                     name={this.state.category}
-                    placeholder='category' 
+                    placeholder='cat' 
                     value={categoryOptions.text}
                     selection 
                     options={categoryOptions} 
                     onChange={(event) => this.changeHandler(event.target.textContent)}/> */}
-                <h4>Due Date: </h4>
+                <DatePicker
+                    selected={this.state.duedate}
+                    onChange={this.handleDate} />
+                
                 </Form>
             </div>
         )
@@ -52,6 +58,12 @@ class TaskModal extends React.Component {
     changeHandler = (event) => {
         this.setState({category: event})
     }
+
+    handleDate= (date) => {
+        this.setState({
+          duedate: date
+        });
+      }
 }
 
 
