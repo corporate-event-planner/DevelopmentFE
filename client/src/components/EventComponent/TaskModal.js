@@ -1,11 +1,11 @@
 import React from 'react';
 import _ from 'lodash';
-import { Dropdown, Form, Radio, TextArea, Input, Label } from 'semantic-ui-react';
+import { Dropdown, Form, Radio, TextArea, Input, Label, Button } from 'semantic-ui-react';
 import DatePicker from 'react-datepicker';
 import { connect } from 'react-redux';
 
 import "react-datepicker/dist/react-datepicker.css";
-import { getOneEvent, addNewUser } from '../../actions/EventAction'
+import { addNewTask } from '../../actions/TaskActions'
 
 class TaskModal extends React.Component {
     state = {
@@ -93,6 +93,12 @@ class TaskModal extends React.Component {
                     value={this.state.quanity}
                     onChange={this.changeHandler} />
                 </Form>
+                <Button 
+                positive 
+                icon='checkmark' 
+                labelPosition='right' 
+                content='Add New Task' 
+                onClick={this.addNewTask} />
             </div>
         )
     }
@@ -110,6 +116,10 @@ class TaskModal extends React.Component {
           duedate: date
         });
       }
+
+    addNewTask = () => {
+        this.props.addNewTask(this.props.eventid, this.state.task)
+    }
 }
 
 
@@ -131,5 +141,5 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { getOneEvent, addNewUser })(TaskModal);
+export default connect(mapStateToProps, { addNewTask })(TaskModal);
 

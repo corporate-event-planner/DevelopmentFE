@@ -96,7 +96,6 @@ class EventPage extends React.Component {
                                 </Modal.Content>
                                 <Modal.Actions>
                                     <Button negative onClick={this.close}>Cancel</Button>
-                                    <Button positive icon='checkmark' labelPosition='right' content='Yes' onClick={this.addNewTask} />
                                 </Modal.Actions>
                             </Modal>
                             <div className='tasklist-category'>
@@ -134,15 +133,6 @@ class EventPage extends React.Component {
 
     show = size => () => this.setState({ size, open: true });
     close = () => this.setState({ open: false })
-
-    addNewTask = () => {
-        this.props.addNewTask(this.props.eventid, this.state.task)
-    }
-
-    // removeUser (userid) {
-    //     this.props.dummyData(eventid)
-    // }
-    //<button onClick={this.removeUser(user.userid)}>x</button>
 }
 
 const mapStateToProps = (state) => {

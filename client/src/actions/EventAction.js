@@ -7,12 +7,6 @@ export const FETCH_ONEEVENT_FAILURE = 'FETCH_ONEEVENT_FAILURE';
 export const ADD_USER_START = 'ADD_USER_START'
 export const ADD_USER_SUCCESS = 'ADD_USER_SUCCESS'
 
-export const ADD_TASK_START = 'ADD_TASK_START'
-export const ADD_TASK_SUCCESS = 'ADD_TASK_SUCCESS'
-
-export const DUMB_DUMB_FIRE = 'DUMB_DUMB_FIRE';
-export const DUMB_DUMB_WIN = 'DUMB_DUMB_WIN';
-
 const testState = {
     tasklist: [
     {
@@ -90,34 +84,6 @@ export const addNewUser = (eventid, user) => dispatch => {
         .put(`https://corporate-event-planner.herokuapp.com/events/edit/${eventid}`, userDrilled)
         .then(event => {
             dispatch ({ type: ADD_USER_SUCCESS, payload: event.data })
-        })
-        .catch(error => {
-            console.log('catch error', error.response)
-        })
-}
-
-// export const removeUser = (userid) => dispatch => {
-//     dispatch({ type: DELETE_USER_START })
-//     axiosWithAuth()
-//         .delete(`https://corporate-event-planner.herokuapp.com/user/${userid}`)
-
-// }
-
-export const addNewTask = (eventid, task) => dispatch => {
-    dispatch ({ type: ADD_TASK_START })
-    axiosWithAuth()
-        .put(`https://corporate-event-planner.herokuapp.com/events/${eventid}`, task)
-        .then(event=> {
-            dispatch({ type: ADD_TASK_SUCCESS, payload: event.data})
-        })
-}
-
-export const dummyData = (eventid) => dispatch => {
-    dispatch({ type: DUMB_DUMB_FIRE })
-    axiosWithAuth()
-        .put(`https://corporate-event-planner.herokuapp.com/events/edit/${eventid}`,(testState))
-        .then(event => {
-            dispatch({ type: DUMB_DUMB_WIN, payload: event.data })
         })
         .catch(error => {
             console.log('catch error', error.response)

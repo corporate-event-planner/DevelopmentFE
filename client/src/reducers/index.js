@@ -3,6 +3,7 @@ import { loginReducer } from "./LoginReducer";
 import { registerReducer } from "./RegisterReducer";
 import { eventsReducer } from './EventsReducer';
 import { eventReducer } from './EventReducer'
+import { taskReducer } from './TaskReducer'
 import notifyReducer from "react-redux-notify";
 
 export default combineReducers({
@@ -10,5 +11,6 @@ export default combineReducers({
   notifications: notifyReducer,
   registerReducer,
   eventsReducer,
-  eventReducer
+  eventReducer,
+  taskReducer
 });
