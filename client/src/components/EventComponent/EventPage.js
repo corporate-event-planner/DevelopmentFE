@@ -3,15 +3,61 @@ import { connect } from 'react-redux';
 
 import Navigation from '../NavComponent/Navigation';
 import Footer from '../FooterComponent/Footer';
+import Tasks from './Tasks'
 import './EventPage.scss'
-import { getOneEvent } from '../../actions/EventAction'
+import { getOneEvent, dummyData } from '../../actions/EventAction'
 
 class EventPage extends React.Component {
     state = {
-        search: ''
+        search: '',
+        tasklist: [
+            {
+                "taskid": 5,
+                "name": "Reservations",
+                "description": "Make Hotel Reservations",
+                "assigned": "John",
+                "completed": false,
+                "duedate": "8-1-2019",
+                "category": "Service",
+                "purchase": []
+                },
+                {
+                "taskid": 6,
+                "name": "RSVP",
+                "description": "Have all employees either RSVP or opt out",
+                "assigned": "Michelle",
+                "completed": false,
+                "duedate": "7-15-2019",
+                "category": "Task",
+                "purchase": []
+                }
+        ]
     }
 
     render() {
+        if (this.props.mountComplete === false){
+            return <h1>Loading</h1>
+        } else {
+            console.log('Event Render', this.props.event.tasklist)
+            // all incorrect filter 'includes'
+            const teamOrgTasks = this.props.event.tasklist.filter(task =>
+                task.category.includes('Service'));
+    
+            const promotionTasks = this.props.event.tasklist.filter(task =>
+                task.category.includes('Promtion'));
+    
+            const productionTasks = this.props.event.tasklist.filter(task =>
+                task.category.includes('Production'));
+    
+            const marketDevTasks = this.props.event.tasklist.filter(task =>
+                task.category.includes('Market Development'));
+    
+            const setupTasks = this.props.event.tasklist.filter(task =>
+                task.category.includes('Set-up'));
+    
+            const otherTasks = this.props.event.tasklist.filter(task =>
+                task.category.includes('Other'));
+    
         return(
             <>
             <Navigation />
@@ -32,33 +78,32 @@ class EventPage extends React.Component {
                         </div>
                     </div>
                     <div className='event-tasks'>
-                        {this.props.event.tasklist.map(list => (
-                            <div className='tasklist-container'>
-                                
-                                <div className='tasklist-category'>
-                                    <h3>Graphic Design</h3>
-                                </div>
-                                <div className='tasks'>
-                                
-                                </div>
+                        <div className='tasklist-container'>
+                            <div className='tasklist-category'>
+                                <h3>Graphic Design</h3>
                             </div>
-                        ))}
+                            <Tasks tasks={teamOrgTasks} />
+                        </div>
                     </div>
                 </div>
             <Footer />
             </>
-        )
+            )
+        }
     }
-
-    componentDidMount() {
-        this.props.getOneEvent(this.props.eventid);
+    
+    componentDidMount () {
+        const { eventid } = this.props.match.params;
+        this.props.getOneEvent(eventid);
+        this.props.dummyData(eventid)
     }
 }
 
 const mapStateToProps = (state) => {
     return {
-        event: state.eventsReducer.event,
+        event: state.eventReducer.event,
+        mountComplete: state.eventReducer.mountComplete,
     }
 }
 
-export default connect(mapStateToProps, { getOneEvent })(EventPage);
+export default connect(mapStateToProps, { getOneEvent, dummyData })(EventPage);

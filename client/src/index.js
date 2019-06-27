@@ -31,7 +31,7 @@ ReactDOM.render(
       <PrivateRoute path="/createevent" component={Home} />
       <PrivateRoute path="/form" component={EventsForm} />
       <Route path="/login" component={Login} />
-      <Route exact path='/events/:eventid' render={props => <EventPage {...props} eventid={props.match.params.eventid} />} />
+      <Route path="/events/:eventid" component={EventPage}/>
     </Router>
   </Provider>,
   rootElement
