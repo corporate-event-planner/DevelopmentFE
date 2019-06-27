@@ -3,7 +3,7 @@ import { connect } from 'react-router-dom';
 
 import './EventPage.scss'
 // import { Accordion } from 'semantic-ui-react'
-import { Table, Checkbox, Button, Icon } from 'semantic-ui-react';
+import { Table, Checkbox } from 'semantic-ui-react';
 
 class Tasks extends React.Component {
     constructor (props) {
@@ -12,11 +12,13 @@ class Tasks extends React.Component {
             activeIndex: 0,
             column: null,
             direction: null,
+            open: false,
         }
     }
 
     render() {
-        console.log('task render cl', this.props);
+        // console.log('task render cl', this.props);
+        // console.log('render, eventid', this.props.eventid)
         const { column, data, direction } = this.state
         return(
             <>
@@ -46,21 +48,13 @@ class Tasks extends React.Component {
                     </>
                 )}
                 </Table.Body>
-                <Table.Footer fullWidth>
-                <Table.Row>
-                    <Table.HeaderCell />
-                    <Table.HeaderCell colSpan='4'>
-                    <Button floated='right' icon labelPosition='left' primary size='small'>
-                        <Icon name='check' /> Add Task
-                    </Button>
-                    </Table.HeaderCell>
-                </Table.Row>
-                </Table.Footer>
             </Table>
             </div>
             </>
         )
     }
+
+
 
     // purchaseClick = (titleProps) => {
     //     const { index } = titleProps

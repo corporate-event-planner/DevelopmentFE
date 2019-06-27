@@ -4,6 +4,8 @@ import {
     FETCH_ONEEVENT_FAILURE,
     ADD_USER_START,
     ADD_USER_SUCCESS,
+    ADD_TASK_START,
+    ADD_TASK_SUCCESS,
     DUMB_DUMB_FIRE,
     DUMB_DUMB_WIN
 } from '../actions/EventAction'
@@ -37,6 +39,19 @@ export const eventReducer = ( state = initialState, action ) => {
                 ...state,
                 error: action.payload,
                 isSearching: false
+            }
+        case ADD_USER_START:
+            return {
+                ...state,
+                placingData: true,
+                error: ''
+            }
+        case ADD_USER_SUCCESS:
+            return {
+                ...state,
+                error: '',
+                placingData: false,
+                event: action.payload
             }
         case ADD_USER_START:
             return {

@@ -5,24 +5,24 @@ import Navigation from '../NavComponent/Navigation';
 import Footer from '../FooterComponent/Footer';
 import Tasks from './Tasks'
 import './EventPage.scss'
-import { Form } from 'semantic-ui-react'
-import { getOneEvent, dummyData } from '../../actions/EventAction'
+import { Form, Button, Icon, Modal } from 'semantic-ui-react'
+import { getOneEvent, addNewUser } from '../../actions/EventAction'
 
 class EventPage extends React.Component {
     state = {
         search: '',
-        userlist: [{
-            user:  {
-                username: ''
-            }
-        }]
+        username: '',
+        eventID: {},
     }
 
     render() {
+        // this.setState({eventID: {}})
         if (this.props.mountComplete === false){
-            return <h1>Loading</h1>
+            return (
+            <h1>Loading</h1>
+            )
         } else {
-            console.log('Event Render', this.props.event.tasklist)
+            // console.log('Event Render', this.props.event.tasklist)
             // all incorrect filter 'includes'
             const teamOrgTasks = this.props.event.tasklist.filter(task =>
                 task.category.includes('Service'));
@@ -68,25 +68,46 @@ class EventPage extends React.Component {
                             icon='search'
                             size='medium'
                             name='username'
-                            placeholder='Find events'
-                            value={this.state.search}
+                            placeholder='Add by username'
+                            value={this.state.username}
                             onChange={this.handleChanges}
                             /><button onClick={this.addUser}>Add User</button>
                         </div>
                         <div className='event-users-list'>
                         {this.props.event.userList.map(user => (
                             <div className='event-user'>
-                                {user.username} <button>x</button>
+                                {user.user.username} 
                             </div>
                         ))}
                         </div>
                     </div>
                     <div className='event-tasks'>
                         <div className='tasklist-container'>
+                            <Button icon labelPosition='left' primary size='small' onClick={this.show('small')}>
+                                <Icon name='check' /> Add Task
+                            </Button>
+                            <Modal size={'small'} open={this.state.open} onClose={this.close}>
+                                <Modal.Header>New Task</Modal.Header>
+                                <Modal.Content>
+                                    <form>
+                                        <h4>Task Description :</h4>
+                                        <input />
+                                        <h4>Assigned: </h4>
+                                        <input />
+                                        <h4>Due Date: </h4>
+                                        <h4>Category: </h4>
+
+                                    </form>
+                                </Modal.Content>
+                                <Modal.Actions>
+                                    <Button negative onClick={this.close}>Cancel</Button>
+                                    <Button positive icon='checkmark' labelPosition='right' content='Yes' onClick={this.addNewTask} />
+                                </Modal.Actions>
+                            </Modal>
                             <div className='tasklist-category'>
                                 <h3>Graphic Design</h3>
                             </div>
-                            <Tasks tasks={teamOrgTasks} />
+                            <Tasks tasks={teamOrgTasks} eventid={this.props.match.params} />
                         </div>
                     </div>
                 </div>
@@ -98,19 +119,35 @@ class EventPage extends React.Component {
     
     componentDidMount () {
         const { eventid } = this.props.match.params;
+        this.setState({ eventID: eventid })
         this.props.getOneEvent(eventid);
-        this.props.dummyData(eventid)
+        console.log('CDM')
+        // this.props.dummyData(eventid)
     }
 
     handleChanges = (event) => {
         this.setState({ [event.target.name]: event.target.value})
-        console.log('change handerl', this.state.userlist.user.username)
+        console.log(this.props.addNewUser)
     }
 
-    addUser (event) {
+    addUser = (event) => {
+        // console.log('addUser eventid', this.state.eventID)
+        // console.log('addUser name', this.state.username)
         event.preventDefault();
-        this.props.addUser(this.state.userlist)
+        this.props.addNewUser(this.state.eventID, this.state.username)
     }
+
+    show = size => () => this.setState({ size, open: true });
+    close = () => this.setState({ open: false })
+
+    addNewTask = () => {
+        this.props.addNewTask(this.props.eventid, this.state.task)
+    }
+
+    // removeUser (userid) {
+    //     this.props.dummyData(eventid)
+    // }
+    //<button onClick={this.removeUser(user.userid)}>x</button>
 }
 
 const mapStateToProps = (state) => {
@@ -120,4 +157,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { getOneEvent, dummyData })(EventPage);
+export default connect(mapStateToProps, { getOneEvent, addNewUser })(EventPage);
