@@ -1,9 +1,11 @@
 import React from 'react';
 import { connect } from "react-redux"
 import { Form, Button } from "semantic-ui-react"
+import { getMe, updateProfile } from "../../actions/ProfileAction";
 
 class EditProfile extends React.Component {
   state = {
+    userid: "",
     username: "",
     email: "",
     companyname: "",
@@ -11,12 +13,15 @@ class EditProfile extends React.Component {
   }
 
   componentDidMount() {
-
+    this.props.getMe().then(res => {
+      this.setState({ ...res });
+      console.log(res);
+    });
   }
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.state);
+    this.props.updateProfile(this.state.userid, { ...this.state })
   }
 
   handleOnChange = (e) => {
@@ -48,4 +53,4 @@ class EditProfile extends React.Component {
   }
 }
 
-export default connect(null, {})(EditProfile);
+export default connect(null, { getMe, updateProfile })(EditProfile);
