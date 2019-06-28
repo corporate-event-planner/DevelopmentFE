@@ -82,9 +82,11 @@ export const addNewUser = (eventid, user) => dispatch => {
   axiosWithAuth()
     .put(`https://corporate-event-planner.herokuapp.com/events/edit/${eventid}`, userDrilled)
     .then(event => {
-      dispatch({ type: ADD_USER_SUCCESS, payload: event.data })
+      dispatch({ type: ADD_USER_SUCCESS, payload: event.data.userList })
+      console.log('in da action dispatch yo', event.data)
+      getOneEvent()
     })
     .catch(error => {
-      console.log('catch error', error.response)
+      console.log('catch error', error)
     })
 }

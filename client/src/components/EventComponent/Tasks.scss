@@ -1,0 +1,44 @@
+@import '../../styles/variables.scss';
+
+.task-list {
+    .task-item{
+        height: 50px;
+        display: flex;
+        flex-wrap: nowrap;
+
+        p {
+            font-family: $base-font;
+        }
+
+        .task-complete {
+            width: 4%;
+            padding-top: 15px;
+            padding-left: 8px;
+            background-color: $secondary-color;
+            border: 1px solid $gray-color;
+        }
+
+        .task-name {
+            width:56%;
+            padding: 4px 4px;
+            font-family: $base-font;
+            font-size: 19px;
+            letter-spacing: .3px;
+            border: 1px solid $gray-color;
+        }
+
+        .task-assigned {
+            width: 15%;
+            border: 1px solid $gray-color;
+        }
+
+        .task-duedate {
+            width: 20%;
+            border: 1px solid $gray-color;
+        }
+
+        .task-purchase {
+            border: 1px solid $gray-color;
+        }
+    }
+}

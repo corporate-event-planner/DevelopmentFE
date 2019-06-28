@@ -24,11 +24,11 @@ class EventPage extends React.Component {
                 </Dimmer>
             )
         } else {
-            const teamOrgTasks = this.props.event.tasklist.filter(task =>
+            const organizationTasks = this.props.event.tasklist.filter(task =>
                 task.category.includes('Organization'));
 
             const promotionTasks = this.props.event.tasklist.filter(task =>
-                task.category.includes('Promtion'));
+                task.category.includes('Promotion'));
 
             const productionTasks = this.props.event.tasklist.filter(task =>
                 task.category.includes('Production'));
@@ -109,8 +109,28 @@ class EventPage extends React.Component {
                                     </Modal.Actions>
                                 </Modal>
                                 <div className='tasklist-category'>
-                                    <h3>Graphic Design</h3>
+                                    <h3>Organization</h3>
+                                    <Tasks tasks={organizationTasks} />
+                                </div>
+                                <div className='tasklist-category'>
+                                    <h3>Promotion</h3>
+                                    <Tasks tasks={promotionTasks} />
+                                </div>
+                                <div className='tasklist-category'>
+                                    <h3>Production</h3>
                                     <Tasks tasks={productionTasks} />
+                                </div>
+                                <div className='tasklist-category'>
+                                    <h3>Market Development</h3>
+                                    <Tasks tasks={marketDevTasks} />
+                                </div>
+                                <div className='tasklist-category'>
+                                    <h3>Set-up</h3>
+                                    <Tasks tasks={setupTasks} />
+                                </div>
+                                <div className='tasklist-category'>
+                                    <h3>Other</h3>
+                                    <Tasks tasks={otherTasks} />
                                 </div>
                             </div>
                         </div>
@@ -124,18 +144,18 @@ class EventPage extends React.Component {
     componentDidMount() {
         const { eventid } = this.props.match.params;
         this.props.getOneEvent(eventid);
-        // console.log('props log', eventid)
     }
 
     handleChanges = (event) => {
         this.setState({ [event.target.name]: event.target.value })
-        // console.log('handChange', this.state.username)
-        // console.log('handleChanges, NewUser',this.props.addNewUser)
     }
 
     addUser = (event, eventid) => {
         event.preventDefault();
         this.props.addNewUser(eventid, this.state.username)
+        // IF THIS DOESN'T WORK. ACTIVATE YOUR TRAP CARD
+        // Windows.reload()
+        // Location.reload()
     }
 
     show = size => () => this.setState({ size, open: true });
@@ -146,6 +166,7 @@ const mapStateToProps = (state) => {
     return {
         event: state.eventReducer.event,
         mountComplete: state.eventReducer.mountComplete,
+        newUser: state.eventReducer.newUser,
     }
 }
 

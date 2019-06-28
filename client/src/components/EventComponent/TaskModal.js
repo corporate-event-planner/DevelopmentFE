@@ -23,15 +23,7 @@ class TaskModal extends React.Component {
         }
     }
 
-    render() {
-        console.log('name', this.state.name)
-        console.log('duedate',this.state.duedate)
-        console.log('category', this.state.category)
-        console.log('purchase', this.state.purchaseDescription)
-        console.log('price', this.state.price)
-        console.log('qty', this.state.qty)
-        console.log('vendorname', this.state.vendorname)
-        
+    render() {        
         return(
             <div className='task-form'>
                 <Form>
@@ -130,7 +122,7 @@ class TaskModal extends React.Component {
 
 
 const categoryDefinitions = [
-    'Team Organization', 'Promotion', 'Production', 'Market Development', 'Set-up', 'Other'
+    'Organization', 'Promotion', 'Production', 'Market Development', 'Set-up', 'Other'
 ]
 
 const categoryOptions = _.map(categoryDefinitions, (category, index) => ({

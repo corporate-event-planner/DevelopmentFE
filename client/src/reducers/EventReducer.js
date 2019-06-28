@@ -8,6 +8,7 @@ import {
 
 const initialState = {
     event: [],
+    newUser: [],
     fetchingData: false,
     placingData: false,
     errors: '',
@@ -48,7 +49,7 @@ export const eventReducer = (state = initialState, action) => {
                 ...state,
                 error: '',
                 placingData: false,
-                event: action.payload
+                event: {...state.event, [state.event.userList]: action.payload}
             }
         default:
             return state;

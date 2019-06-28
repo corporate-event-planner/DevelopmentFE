@@ -16,6 +16,11 @@
         border-top-right-radius: 8px;
         background-color: $secondary-color;
         color: $off-white;
+        font-family: $primary-font;
+
+        h2 {
+            font-family: $primary-font;
+        }
     }
 
     .event-upper {
@@ -104,6 +109,11 @@
             button {
                 align: right;
             }
+
+            .tasklist-category {
+                padding: 20px;
+            }
         }
+
     }
 }

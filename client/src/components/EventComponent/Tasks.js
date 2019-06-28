@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-router-dom';
 
-import './EventPage.scss'
+import './Tasks.scss'
 // import { Accordion } from 'semantic-ui-react'
-import { Table, Checkbox } from 'semantic-ui-react';
+import { Checkbox } from 'semantic-ui-react';
 
 class Tasks extends React.Component {
     constructor (props) {
@@ -18,38 +18,24 @@ class Tasks extends React.Component {
 
     render() {
         // console.log('task render cl', this.props.eventID);
-        const { column, data, direction } = this.state
+        // const { purchases } = this.props.tasks.purchase
+        // console.log(purchases)
+        // console.log(this.props.tasks)
+        // console.log(this.props.tasks.purchase)
         return(
-            <>
             <div className='task-list'>
-                <Table celled>
-                    <Table.Body>
-                {this.props.tasks.map(task =>
-                    <>
-                    <Table.Row>
-                        <Table.Cell size='small'>
-                        <Checkbox slider />
-                        </Table.Cell>
-                        <Table.Cell>{task.description}</Table.Cell>
-                        <Table.Cell>{task.assigned}</Table.Cell>
-                        <Table.Cell>{task.duedate}</Table.Cell>
-                        <Table.Cell>$$$</Table.Cell>
-                    </Table.Row>
-                    {task.purchase.map(purchase => (
-                        <Table.Row>
-                            <Table.Cell> </Table.Cell>
-                            <Table.Cell>{purchase.description}</Table.Cell>
-                            <Table.Cell>{purchase.vendorname}</Table.Cell>
-                            <Table.Cell>{purchase.price}</Table.Cell>
-                            <Table.Cell>{purchase.qty}</Table.Cell>
-                        </Table.Row>
-                    ))}
-                    </>
+                {this.props.tasks.map(task => 
+                    <div className='task-item'>
+                        <div className='task-complete'>
+                            <Checkbox />
+                        </div>
+                        <div className='task-name'><p>{task.name}</p></div>
+                        <div className='task-assigned'><p>{task.assigned}</p></div>
+                        <div className='task-duedate'><p>{task.duedate}</p></div>
+                        <div className='task-purchase'><span>$$$</span></div>
+                    </div>
                 )}
-                </Table.Body>
-            </Table>
             </div>
-            </>
         )
     }
 
@@ -85,3 +71,15 @@ class Tasks extends React.Component {
 }
 
 export default Tasks
+
+
+/* Can't access the purchase [ ]
+<div className='task-purchases'>
+<div className='purchase-item'>
+    <div className='purchase-empty'> <span>~~</span></div>
+    <div className='purchase-name'>{task.purchase.name}</div>
+    <div className='purchase-vendor'>{task.purchase.vendorname}</div>
+    <div className='purchase-price'>{task.purchase.price}</div>
+    <div className='purchase-qty'>{task.purchase.qty}</div>
+</div> 
+</div>*/
