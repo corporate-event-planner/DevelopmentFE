@@ -10,10 +10,8 @@ const Navigation = () => {
                 <div className='title'><h1>Corporate Event Planner</h1></div>
                 <div className='nav-items'>
                     <Link className='nav-link' to='/' >Home</Link> <span>|</span>
-                    <Link className='nav-link' to="/calendar"> Calendar </Link> <span>|</span>
-                    <Link className='nav-link' to='/events'>Events</Link> <span>|</span>
-                    <Link className='nav-link' to="/form"> Add Event </Link> <span>|</span>
-                    <Link className='nav-link' to="/editprofile"> Edit Profile </Link>
+                    <Link className='nav-link' to="/calendar"> Create Event </Link> <span>|</span>
+                    <Link className='nav-link' to='/events'>Events</Link>
                 </div>
             </div>
         </div>

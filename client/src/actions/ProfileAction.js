@@ -30,4 +30,4 @@ export const getMe = () => dispatch => {
     }).catch(err => {
         return false;
     })
-}
+} 

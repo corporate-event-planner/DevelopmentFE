@@ -29,7 +29,6 @@ ReactDOM.render(
       <PrivateRoute exact path="/" component={Home} />
       <PrivateRoute path="/calendar" component={CalendarEvents} />
       <PrivateRoute exact path="/events" component={EventsList} />
-      <PrivateRoute path="/createevent" component={Home} />
       <PrivateRoute path="/form" component={EventsForm} />
       <PrivateRoute path="/editprofile" component={EditProfile} />
       <Route path="/login" component={Login} />
