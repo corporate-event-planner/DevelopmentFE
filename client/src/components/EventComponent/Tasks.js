@@ -27,16 +27,12 @@ class Tasks extends React.Component {
                 {this.props.tasks.map(task => 
                     <div className='task-item'>
                         <div className='task-complete'>
-                            {/* {if ( task.complete === true ) {
-                             return (<Checkbox active /> )
-                            } else {
-                                return ( <Checkbox /> )
-                            }} */}
+                            <Checkbox />
                         </div>
                         <div className='task-name'><p>{task.name}</p></div>
                         <div className='task-assigned'><p>{task.assigned}</p></div>
                         <div className='task-duedate'><p>{task.duedate}</p></div>
-                        <div className='task-purchase'><span>$$$</span></div>
+                        <div className='task-purchase'><i class="fas fa-shopping-basket fa-2x"></i></div>
                     </div>
                 )}
             </div>

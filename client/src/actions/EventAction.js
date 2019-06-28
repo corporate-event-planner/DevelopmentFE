@@ -78,7 +78,6 @@ export const addNewUser = (eventid, user) => dispatch => {
     ]
   }
 
-
   dispatch({ type: ADD_USER_START })
   return axiosWithAuth()
     .put(`https://corporate-event-planner.herokuapp.com/events/edit/${eventid}`, userDrilled)

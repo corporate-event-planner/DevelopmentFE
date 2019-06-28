@@ -18,7 +18,7 @@ export const addNewTask = (eventid, task) => dispatch => {
                         'description': task.purchaseDescription,
                         'vendorname': task.vendorname,
                         'price': task.price,
-                        'qty': task.qty,
+                        'qty': task.qty
                     }
                 ]
 

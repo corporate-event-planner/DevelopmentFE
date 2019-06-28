@@ -8,17 +8,23 @@ export const SUCCESS_REGISTER = "SUCCESS_REGISTER";
 
 export const fetchRegister = user => dispatch => {
   const drilledUser = {
-    'userid': user.userid,
     'username': user.username,
     'email': user.email,
     'companyname': user.companyname,
     'role': user.role,
-    'image': user.image
+    'password': user.password
   }
+
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
   console.log(user);
   dispatch({ type: START_REGISTER });
   return axios
-    .post(`https://corporate-event-planner.herokuapp.com/signup`, drilledUser)
+    .post(`https://corporate-event-planner.herokuapp.com/signup/`, drilledUser, config)
     .then(res => {
       dispatch({ type: SUCCESS_REGISTER });
       return true;

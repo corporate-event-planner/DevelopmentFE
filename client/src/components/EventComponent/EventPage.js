@@ -44,6 +44,7 @@ class EventPage extends React.Component {
                 
             const { eventid } = this.props.match.params
             
+            console.log('eventpge eventid cl',eventid)
 
             return (
                 <div>
@@ -51,7 +52,10 @@ class EventPage extends React.Component {
                     <div className='event-container'>
                         <div className='event-header'>
                             <div className='title'><h1>{this.props.event.name}</h1></div>
-                            <div className='mod-buttons'><i class="far fa-edit fa-2x"></i> &nbsp; &nbsp; &nbsp; &nbsp;<i class="far fa-trash-alt fa-2x"></i></div>
+                            <div className='mod-buttons'>
+                                <i class="far fa-edit fa-2x">
+                                    
+                                </i> &nbsp; &nbsp; &nbsp; &nbsp;<i class="far fa-trash-alt fa-2x"></i></div>
                         </div>
                         <div className='event-upper'>
                             <div className='events-general'>
