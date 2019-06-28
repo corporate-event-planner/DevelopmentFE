@@ -52,7 +52,10 @@ class Home extends React.Component {
                             </Modal>
                         </div>
                         <div className='home-tasks'>
-
+                            <div className='home-tasks-header'><h2>Upcoming Tasks</h2></div>
+                            <div className='home-task-list'>
+                                {/* {this.props.user.userEvents} */}
+                            </div>
                         </div>
                     </div>
                     <div className='home-lower'>
@@ -61,6 +64,7 @@ class Home extends React.Component {
                         </div>
                         <div className='home-events'>
                             {this.props.user.userEvents.map(event => (
+                                console.log('map of home page events', event),
                                 <Card link className='event-card' color='#082A47' >
                                     <Card.Content className='event-title' header={event.event.name} color='white' />
                                     <Card.Content>

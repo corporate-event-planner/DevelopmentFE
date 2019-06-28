@@ -36,11 +36,15 @@ class RegisterPage extends React.Component {
     });
   };
 
-  handleOnChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+  handleOnChange = e => { 
+    this.setState({
+      ...this.state,
+      [e.target.name]: e.target.value });
   };
 
   render() {
+
+    console.log(this.state)
     return (
       <Form
         size="large"

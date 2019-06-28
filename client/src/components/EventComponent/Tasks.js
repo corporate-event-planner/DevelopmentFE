@@ -27,7 +27,11 @@ class Tasks extends React.Component {
                 {this.props.tasks.map(task => 
                     <div className='task-item'>
                         <div className='task-complete'>
-                            <Checkbox />
+                            {/* {if ( task.complete === true ) {
+                             return (<Checkbox active /> )
+                            } else {
+                                return ( <Checkbox /> )
+                            }} */}
                         </div>
                         <div className='task-name'><p>{task.name}</p></div>
                         <div className='task-assigned'><p>{task.assigned}</p></div>
@@ -39,7 +43,9 @@ class Tasks extends React.Component {
         )
     }
 
+    completeClick = (eventid) => {
 
+    }
 
     // purchaseClick = (titleProps) => {
     //     const { index } = titleProps

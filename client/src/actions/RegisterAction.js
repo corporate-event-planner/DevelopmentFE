@@ -7,10 +7,18 @@ export const SUCCESS_REGISTER = "SUCCESS_REGISTER";
 // const api = "https://backendfoodtruck.herokuapp.com";
 
 export const fetchRegister = user => dispatch => {
+  const drilledUser = {
+    'userid': user.userid,
+    'username': user.username,
+    'email': user.email,
+    'companyname': user.companyname,
+    'role': user.role,
+    'image': user.image
+  }
   console.log(user);
   dispatch({ type: START_REGISTER });
   return axios
-    .post(`/register`, user)
+    .post(`https://corporate-event-planner.herokuapp.com/signup`, drilledUser)
     .then(res => {
       dispatch({ type: SUCCESS_REGISTER });
       return true;
