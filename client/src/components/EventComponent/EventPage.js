@@ -6,14 +6,14 @@ import Footer from '../FooterComponent/Footer';
 import Tasks from './Tasks'
 import TaskModal from './TaskModal'
 import './EventPage.scss'
-import { Form, Button, Icon, Modal, Grid, Dimmer, Loader, Dropdown } from 'semantic-ui-react'
+import { Form, Button, Icon, Modal, Dimmer, Loader, Dropdown } from 'semantic-ui-react'
 import { getOneEvent, addNewUser } from '../../actions/EventAction'
 
 class EventPage extends React.Component {
     state = {
         search: '',
         username: '',
-        eventID: null,
+        id: '',
     }
 
     render() {
@@ -25,7 +25,7 @@ class EventPage extends React.Component {
             )
         } else {
             const teamOrgTasks = this.props.event.tasklist.filter(task =>
-                task.category.includes('Graphic Design'));
+                task.category.includes('Organization'));
 
             const promotionTasks = this.props.event.tasklist.filter(task =>
                 task.category.includes('Promtion'));
@@ -41,59 +41,58 @@ class EventPage extends React.Component {
 
             const otherTasks = this.props.event.tasklist.filter(task =>
                 task.category.includes('Other'));
-
+                
             const { eventid } = this.props.match.params
+            console.log(eventid)
 
             return (
                 <div>
                     <Navigation />
                     <div className='event-container'>
                         <div className='event-header'>
-                            <h1>{this.props.event.name}</h1>
+                            <div className='title'><h1>{this.props.event.name}</h1></div>
+                            <div className='mod-buttons'><span>E</span> <span>X</span></div>
                         </div>
-                        <Grid columns="two">
-                            <Grid.Row>
-                                <Grid.Column>
-                                    <div className='event-upper'>
-                                        <div className='events-general'>
-                                            <h4>Company: </h4> <span>{this.props.event.companyname}</span>
-                                            <h4>Date: </h4> <span>{this.props.event.date}</span>
-                                            <h4>Budget: </h4> <span>{this.props.event.budget}</span>
-                                            {/* ADD BUDGET % HERE */}
+                        <div className='event-upper'>
+                            <div className='events-general'>
+                                <div className='events-generalhead'>
+                                    <h3>Info</h3>
+                                </div>
+                                <h4>Company: </h4> <p>{this.props.event.companyname}</p>
+                                <h4>Date: </h4> <p>{this.props.event.date}</p>
+                                <h4>Budget: </h4> <p>{this.props.event.budget}</p>
+                                {/* ADD BUDGET % HERE */}
+                            </div>
+                            <div className='events-description'>
+                                <div className='events-descriptionheader'>
+                                    <h4>Description: </h4>
+                                </div>
+                                <p>{this.props.event.description}</p>
+                            </div>
+                        </div>
+                        <div className='event-lower'>
+                            <div className='event-users'>
+                                <div className='event-users-header'>
+                                    <h3>Users</h3>
+                                    <Form.Input
+                                        icon='search'
+                                        size='small'
+                                        name='username'
+                                        placeholder='Add by username'
+                                        value={this.state.username}
+                                        onChange={this.handleChanges}
+                                    /><Button onClick={(event) => this.addUser(event, eventid)}>Add User</Button>
+                                </div>
+                                <div className='event-users-list'>
+                                    {this.props.event.userList.map(user => (
+                                        <div className='event-user'>
+                                            <span>{user.user.username}</span>
                                         </div>
-                                        <div className='events-description'>
-                                            <h4>Description: </h4>
-                                            <p>{this.props.event.description}</p>
-                                        </div>
-                                    </div>
-                                </Grid.Column>
-
-                                <Grid.Column>
-                                    <div className='event-users'>
-                                        <div className='event-users-header'>
-                                            <h4>Users</h4>
-                                            <Form.Input
-                                                icon='search'
-                                                size='medium'
-                                                name='username'
-                                                placeholder='Add by username'
-                                                value={this.state.username}
-                                                onChange={this.handleChanges}
-                                            /><button onClick={this.addUser}>Add User</button>
-                                        </div>
-                                        <div className='event-users-list'>
-                                            {this.props.event.userList.map(user => (
-                                                <div className='event-user'>
-                                                    {user.user.username}
-                                                </div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                </Grid.Column>
-                            </Grid.Row>
-                        </Grid>
-
-
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                        
 
                         <div className='event-tasks'>
                             <div className='tasklist-container'>
@@ -106,7 +105,7 @@ class EventPage extends React.Component {
                                         <TaskModal eventID={eventid} />
                                     </Modal.Content>
                                     <Modal.Actions>
-                                        <Button negative onClick={this.close}>Cancel</Button>
+                                        <button negative onClick={this.close}>Cancel</button>
                                     </Modal.Actions>
                                 </Modal>
                                 <div className='tasklist-category'>
@@ -121,23 +120,22 @@ class EventPage extends React.Component {
             )
         }
     }
-
+    
     componentDidMount() {
         const { eventid } = this.props.match.params;
         this.props.getOneEvent(eventid);
-        console.log('props log', eventid)
+        // console.log('props log', eventid)
     }
 
     handleChanges = (event) => {
         this.setState({ [event.target.name]: event.target.value })
-        console.log(this.props.addNewUser)
+        // console.log('handChange', this.state.username)
+        // console.log('handleChanges, NewUser',this.props.addNewUser)
     }
 
-    addUser = (event) => {
-        // console.log('addUser eventid', this.state.eventID)
-        // console.log('addUser name', this.state.username)
+    addUser = (event, eventid) => {
         event.preventDefault();
-        this.props.addNewUser(this.state.eventID, this.state.username)
+        this.props.addNewUser(eventid, this.state.username)
     }
 
     show = size => () => this.setState({ size, open: true });

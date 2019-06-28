@@ -17,7 +17,7 @@ class Tasks extends React.Component {
     }
 
     render() {
-        console.log('task render cl', this.props.eventID);
+        // console.log('task render cl', this.props.eventID);
         const { column, data, direction } = this.state
         return(
             <>

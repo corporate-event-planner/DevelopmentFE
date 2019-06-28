@@ -23,6 +23,7 @@ export const addNewTask = (eventid, task) => dispatch => {
             }
         ]
     }
+    
     console.log(task)
     dispatch ({ type: ADD_TASK_START })
     axiosWithAuth()
