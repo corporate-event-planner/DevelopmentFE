@@ -31,7 +31,7 @@ export const postEvent = event => dispatch => {
         .post("https://corporate-event-planner.herokuapp.com/events/new", event)
         .then(res => {
             dispatch({ type: ADD_EVENTS_SUCCESS, payload: event });
-            return true;
+            return event;
         })
         .catch(err => {
             dispatch({ type: ADD_EVENTS_FAILURE, payload: "Error" });
@@ -42,7 +42,8 @@ export const postEvent = event => dispatch => {
 export const deleteEvent = event => dispatch => {
     dispatch({ type: DELETE_ONE_START });
     return axiosWithAuth().delete(`https://corporate-event-planner.herokuapp.com/events/delete/${event.eventid}`).then(res => {
-        dispatch({ type: DELETE_ONE_SUCCESS, payload: event })
+        dispatch({ type: DELETE_ONE_SUCCESS, payload: event });
+        return true;
     }).catch(err => {
         dispatch({ type: DELETE_ONE_FAILURE })
     });

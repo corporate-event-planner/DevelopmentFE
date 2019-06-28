@@ -62,7 +62,8 @@ class EventsForm extends React.Component {
     name: "",
     description: "",
     budget: "",
-    activeIndex: 0
+    activeIndex: 0,
+    companyname: ""
   };
 
   handleOnChange = e => {
@@ -141,6 +142,19 @@ class EventsForm extends React.Component {
                   <Label>.00</Label>
                 </Input>
               </Form.Field>
+
+            </Grid.Column>
+
+            <Grid.Column>
+              <Form.Field>
+                <label>Company Name</label>
+                <input
+                  placeholder="companyname"
+                  name="companyname"
+                  onChange={this.handleOnChange}
+                  value={this.state.companyname}
+                />
+              </Form.Field>
             </Grid.Column>
           </Grid.Row>
           {/* <Grid.Row stretched>
@@ -174,7 +188,7 @@ class EventsForm extends React.Component {
               </Accordion>
             </Grid.Column>
           </Grid.Row> */}
-          <Grid.Row stretched>
+          {/* <Grid.Row stretched>
             <Grid.Column stretched>
 
               <Accordion as={Menu} vertical style={{ "width": "100%" }}>
@@ -189,7 +203,7 @@ class EventsForm extends React.Component {
                 </Menu.Item>
               </Accordion>
             </Grid.Column>
-          </Grid.Row>
+          </Grid.Row> */}
           <Grid.Row>
             <Grid.Column>
 
