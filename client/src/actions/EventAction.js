@@ -53,14 +53,14 @@ const testState = {
 }
 
 export const getOneEvent = (eventid) => dispatch => {
-  // console.log('we in da action now, fam')
+  console.log('we in da action now, fam')
   // console.log('here be da eventid', eventid)
   dispatch({ type: FETCH_ONEEVENT_START })
   axiosWithAuth()
     .get(`https://corporate-event-planner.herokuapp.com/events/${eventid}`)
     .then(event => {
       dispatch({ type: FETCH_ONEEVENT_SUCCESS, payload: event.data })
-      // console.log('data do what data does')
+      console.log('data do what data does')
     })
     .catch(error => {
       console.log('catch error', error.response)
@@ -78,13 +78,15 @@ export const addNewUser = (eventid, user) => dispatch => {
     ]
   }
 
+
   dispatch({ type: ADD_USER_START })
-  axiosWithAuth()
+  return axiosWithAuth()
     .put(`https://corporate-event-planner.herokuapp.com/events/edit/${eventid}`, userDrilled)
     .then(event => {
-      dispatch({ type: ADD_USER_SUCCESS, payload: event.data.userList })
-      console.log('in da action dispatch yo', event.data)
-      getOneEvent()
+      // dispatch({ type: ADD_USER_SUCCESS, payload: event.data.userList })
+      // console.log('in da action dispatch yo', event.data)
+      getOneEvent(eventid)
+      console.log('we made it')
     })
     .catch(error => {
       console.log('catch error', error)

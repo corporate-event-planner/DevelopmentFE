@@ -43,7 +43,7 @@ class EventPage extends React.Component {
                 task.category.includes('Other'));
                 
             const { eventid } = this.props.match.params
-            console.log(eventid)
+            
 
             return (
                 <div>
@@ -152,7 +152,8 @@ class EventPage extends React.Component {
 
     addUser = (event, eventid) => {
         event.preventDefault();
-        this.props.addNewUser(eventid, this.state.username)
+        this.props.addNewUser(eventid, this.state.username).then(() => this.props.getOneEvent(eventid))
+        console.log('eventid cl in addUser', eventid)
         // IF THIS DOESN'T WORK. ACTIVATE YOUR TRAP CARD
         // Windows.reload()
         // Location.reload()

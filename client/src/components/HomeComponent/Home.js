@@ -1,12 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { updateProfile, getMe } from '../../actions/HomeAction'
+import { Link } from 'react-router-dom'
+import { updateProfile, getMe, getMyEvents, deleteEvent } from '../../actions/HomeAction'
 import Profile from '../ProfileComponent/edit'
 
 import Navigation from '../NavComponent/Navigation'
 import Footer from '../FooterComponent/Footer'
 import './Home.scss'
-import { Dimmer, Loader, Modal, Button} from 'semantic-ui-react'
+import { Dimmer, Loader, Modal, Button, Card, Grid } from 'semantic-ui-react'
 
 class Home extends React.Component {
     render () {
@@ -27,7 +28,9 @@ class Home extends React.Component {
             )
         } else {
 
-        console.log(this.props.user)
+        // console.log(this.props.user)
+        // const [ userevents ] = this.props.user.userevents
+        // console.log(userevents)
         return(
             <>
             <Navigation />
@@ -52,11 +55,33 @@ class Home extends React.Component {
                         </div>
                     </div>
                     <div className='home-lower'>
-                        <div className='home-current'>
-
+                        <div className='home-lowerheader'>
+                            <h2>My Events</h2>
                         </div>
-                        <div className='home-past'>
+                        <div className='home-events'>
+                            {/* {this.props.user.userevents.map(event => (
+                                <Card link className='event-card' color='#082A47' >
+                                    <Card.Content className='event-title' header={event.name} color='white' />
+                                    <Card.Content>
+                                        <p> Company: {event.companyname}</p>
+                                        <p>Date: {event.date}</p>
+                                        <p>Budget: {event.budget}</p>
+                                    </Card.Content>
+                                    <Grid columns={2}>
+                                        <Grid.Row>
+                                            <Grid.Column >
 
+                                                <Link to={`/events/${event.eventid}`}>
+                                                    <button className="link">View Now</button>
+                                                </Link>
+                                            </Grid.Column>
+                                            <Grid.Column textAlign="right">
+                                                <button negative onClick={() => this.props.deleteEvent(event)}>Delete</button>
+                                            </Grid.Column>
+                                        </Grid.Row>
+                                    </Grid>
+                                </Card>
+                            ))} */}
                         </div>
                     </div>
                 </div>
@@ -78,4 +103,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { getMe, updateProfile })(Home);
+export default connect(mapStateToProps, { getMe, updateProfile, getMyEvents, deleteEvent })(Home);
