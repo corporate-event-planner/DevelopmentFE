@@ -116,6 +116,7 @@ class TaskModal extends React.Component {
 
     addNewTask = () => {
         this.props.addNewTask(this.props.eventID, this.state)
+        window.location.reload()
     }
 }
 

@@ -6,6 +6,7 @@ import { eventReducer } from './EventReducer'
 import { taskReducer } from './TaskReducer'
 import { profileReducer } from './ProfileReducer'
 import { homeReducer } from './HomeReducer'
+import { eventModifyReducer } from './EventModifyReducer'
 import notifyReducer from "react-redux-notify";
 
 export default combineReducers({
@@ -16,5 +17,6 @@ export default combineReducers({
   eventReducer,
   taskReducer,
   profileReducer,
-  homeReducer
+  homeReducer,
+  eventModifyReducer
 });
