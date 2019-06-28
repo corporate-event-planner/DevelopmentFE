@@ -5,6 +5,7 @@ import Navigation from '../NavComponent/Navigation';
 import Footer from '../FooterComponent/Footer';
 import Tasks from './Tasks'
 import TaskModal from './TaskModal'
+import EventModify from './EventModify'
 import './EventPage.scss'
 import { Form, Button, Icon, Modal, Dimmer, Loader, Dropdown } from 'semantic-ui-react'
 import { getOneEvent, addNewUser } from '../../actions/EventAction'
@@ -14,6 +15,8 @@ class EventPage extends React.Component {
         search: '',
         username: '',
         id: '',
+        open1: false,
+        open2: false,
     }
 
     render() {
@@ -53,9 +56,19 @@ class EventPage extends React.Component {
                         <div className='event-header'>
                             <div className='title'><h1>{this.props.event.name}</h1></div>
                             <div className='mod-buttons'>
-                                <i class="far fa-edit fa-2x">
-                                    
-                                </i> &nbsp; &nbsp; &nbsp; &nbsp;<i class="far fa-trash-alt fa-2x"></i></div>
+                                <Button icon labelPosition='left' primary size='medium' onClick={this.show1('medium')}>
+                                    <i class="far fa-edit fa-2x"></i>
+                                </Button>
+                            <Modal size={'medium'} open={this.state.open1} onClose={this.close1}>
+                                    <Modal.Header>New Task</Modal.Header>
+                                    <Modal.Content>
+                                        <EventModify eventid={eventid} />
+                                    </Modal.Content>
+                                    <Modal.Actions>
+                                        <button negative onClick={this.close1}>Cancel</button>
+                                    </Modal.Actions>
+                                </Modal>
+                                 &nbsp; &nbsp; &nbsp; &nbsp;<i class="far fa-trash-alt fa-2x"></i></div>
                         </div>
                         <div className='event-upper'>
                             <div className='events-general'>
@@ -100,16 +113,16 @@ class EventPage extends React.Component {
 
                         <div className='event-tasks'>
                             <div className='tasklist-container'>
-                                <Button icon labelPosition='left' primary size='small' onClick={this.show('small')}>
+                                <Button icon labelPosition='left' primary size='small' onClick={this.show2('small')}>
                                     <Icon name='check' /> Add Task
                                 </Button>
-                                <Modal size={'small'} open={this.state.open} onClose={this.close}>
+                                <Modal size={'small'} open={this.state.open2} onClose={this.close2}>
                                     <Modal.Header>New Task</Modal.Header>
                                     <Modal.Content>
                                         <TaskModal eventID={eventid} />
                                     </Modal.Content>
                                     <Modal.Actions>
-                                        <button negative onClick={this.close}>Cancel</button>
+                                        <button negative onClick={this.close2}>Cancel</button>
                                     </Modal.Actions>
                                 </Modal>
                                 <div className='tasklist-category'>
@@ -163,8 +176,11 @@ class EventPage extends React.Component {
         // Location.reload()
     }
 
-    show = size => () => this.setState({ size, open: true });
-    close = () => this.setState({ open: false })
+    show1 = size => () => this.setState({ size, open1: true });
+    close1 = () => this.setState({ open1: false })
+
+    show2 = size => () => this.setState({ size, open2: true });
+    close2 = () => this.setState({ open2: false })
 }
 
 const mapStateToProps = (state) => {

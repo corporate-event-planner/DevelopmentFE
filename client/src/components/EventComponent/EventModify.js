@@ -1,16 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Form, Button } from 'semantic-ui-react';
-import { getTask, updateTask } from '../../EventModifyAction'
+import { getEvent, updateEvent } from '../../actions/EventModifyAction'
 
 class EventModify extends React.Component {
-    state = {
-        name: '',
-        companyname: '',
-        date: null,
-        budget: '',
-        description: '',
+  constructor(props){
+    super(props)
+    this.state = {
+      name: '',
+      companyname: '',
+      date: null,
+      budget: '',
+      description: '',
     }
+  }
 
     render() {
         return (
@@ -25,7 +28,6 @@ class EventModify extends React.Component {
             </Form.Field>
             <Form.Field>
               <label>Date</label>
-              <input onChange={this.handleOnChange} placeholder='Date' value={this.state.date} name={"date"} />
             </Form.Field>
             <Form.Field>
               <label>Budget</label>
@@ -41,10 +43,23 @@ class EventModify extends React.Component {
     }
 
     componentDidMount() {
-        this.props.getTask().then(res => {
+      this.props.getEvent(this.props.eventid).then(res => {
         this.setState({ ...res });
         console.log(res);
-    } }
+      });
+    }
+
+    handleSubmit = e => {
+      e.preventDefault();
+      this.props.updateEvent(this.props.eventid, { ...this.state })
+      window.location.reload()
+    }
+  
+    handleOnChange = (e) => {
+      this.setState({ 
+        ...this.state,
+        [e.target.name]: e.target.value })
+    }
 }
 
-export default connect(null, { get, updateProfile })(EditProfile);
+export default connect(null, { getEvent, updateEvent })(EventModify);
