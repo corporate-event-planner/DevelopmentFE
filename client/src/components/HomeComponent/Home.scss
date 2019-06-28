@@ -1,0 +1,78 @@
+@import '../../styles/variables.scss';
+
+.home-container {
+    width: 1000px;
+    margin: 80px auto;
+    border: 1px solid $gray-color;
+    border-radius: 10px;
+
+    .home-header {
+        height: 90px;
+        padding: 10px 60px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        background-color: $secondary-color;
+        color: $off-white;
+        font-family: $primary-font;
+
+        h1 {
+            font-family: $primary-font;
+            font-weight: normal;
+            font-size: 38px;
+        }
+    }
+
+    .home-upper {
+        display: flex;
+        justify-content: space-around;
+
+        .home-profile {
+            width: 35%;
+            margin: 30px 10px;
+            padding: 20px;
+            border: 1px solid $gray-color;
+        }
+
+        .home-tasks {
+            width: 55%;
+            margin: 30px 10px;
+            border: 1px solid $gray-color;
+        }
+    }
+
+    .home-lower {
+
+        .home-lowerheader {
+
+        }
+        .home-events {
+        padding: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+
+        .event-card {
+            height: 250px;
+
+            .event-title {
+                background-color: #e2e2e2;
+                color: $off-white;
+            }
+
+            button.link {
+                background-color: $teritary-color;
+                color: $off-white;
+            }
+
+            &:first-child {
+                margin-top: 14px;
+            }
+
+        }
+            
+        }
+    }
+}
