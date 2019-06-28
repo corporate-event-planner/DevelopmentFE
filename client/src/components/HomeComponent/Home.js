@@ -2,8 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { updateProfile, getMe, getMyEvents, deleteEvent } from '../../actions/HomeAction'
-import Profile from '../ProfileComponent/edit'
+import moment from 'moment';
 
+import Profile from '../ProfileComponent/edit'
 import Navigation from '../NavComponent/Navigation'
 import Footer from '../FooterComponent/Footer'
 import './Home.scss'
@@ -30,7 +31,7 @@ class Home extends React.Component {
 
         // console.log(this.props.user)
         // const [ userevents ] = this.props.user.userevents
-        // console.log(userevents)
+        console.log(this.props.user.userEvents)
         return(
             <>
             <Navigation />
@@ -59,29 +60,29 @@ class Home extends React.Component {
                             <h2>My Events</h2>
                         </div>
                         <div className='home-events'>
-                            {/* {this.props.user.userevents.map(event => (
+                            {this.props.user.userEvents.map(event => (
                                 <Card link className='event-card' color='#082A47' >
-                                    <Card.Content className='event-title' header={event.name} color='white' />
+                                    <Card.Content className='event-title' header={event.event.name} color='white' />
                                     <Card.Content>
-                                        <p> Company: {event.companyname}</p>
-                                        <p>Date: {event.date}</p>
-                                        <p>Budget: {event.budget}</p>
+                                        <p> Company: {event.event.companyname}</p>
+                                        <p>Date:{event.event.date})</p>
+                                        <p>Budget: {event.event.budget}</p>
                                     </Card.Content>
                                     <Grid columns={2}>
                                         <Grid.Row>
                                             <Grid.Column >
 
-                                                <Link to={`/events/${event.eventid}`}>
-                                                    <button className="link">View Now</button>
+                                                <Link to={`/events/${event.event.eventid}`}>
+                                                    <Button className="link">View Now</Button>
                                                 </Link>
                                             </Grid.Column>
                                             <Grid.Column textAlign="right">
-                                                <button negative onClick={() => this.props.deleteEvent(event)}>Delete</button>
+                                                <Button negative onClick={() => this.props.deleteEvent(event.event)}>Delete</Button>
                                             </Grid.Column>
                                         </Grid.Row>
                                     </Grid>
                                 </Card>
-                            ))} */}
+                            ))}
                         </div>
                     </div>
                 </div>

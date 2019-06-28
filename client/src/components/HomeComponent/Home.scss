@@ -44,10 +44,34 @@
     }
 
     .home-lower {
+
         .home-lowerheader {
 
         }
         .home-events {
+        padding: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+
+        .event-card {
+            height: 250px;
+
+            .event-title {
+                background-color: #e2e2e2;
+                color: $off-white;
+            }
+
+            button.link {
+                background-color: $teritary-color;
+                color: $off-white;
+            }
+
+            &:first-child {
+                margin-top: 14px;
+            }
+
+        }
             
         }
     }

@@ -41,8 +41,8 @@
                 color: $off-white;
             }
 
-            .ui.card:first-child {
-                margin-top: 1em;
+            &:first-child {
+                margin-top: 14px;
             }
 
         }
